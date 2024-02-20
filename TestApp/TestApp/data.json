@@ -1,0 +1,299 @@
+[
+    {
+        "FOOTBALL": {
+            "PLAYERS": {
+                "STUDY": [
+                    {
+                        "id": "1",
+                        "title": "LIONEL MESSI",
+                        "desc": "Lionel Messi is an Argentine professional footballer widely considered one of the greatest players of all time. Born on June 24, 1987, Messi spent the majority of his career playing for FC Barcelona before joining Paris Saint-Germain (PSG) in 2021. He is known for his incredible dribbling skills, precise finishing, and vision on the field."
+                    },
+                    {
+                        "id": "2",
+                        "title": "CRISTIANO RONALDO",
+                        "desc": "Cristiano Ronaldo is a Portuguese professional footballer regarded as one of the greatest goal scorers in the history of the sport. Born on February 5, 1985, Ronaldo has had successful stints with Sporting CP, Manchester United, Real Madrid, and Juventus. Known for his athleticism and goal-scoring prowess, he has won multiple FIFA Ballon d'Or awards."
+                    },
+                    {
+                        "id": "3",
+                        "title": "NEYMAR JR.",
+                        "desc": "Neymar Jr. is a Brazilian professional footballer known for his flair, skill, and creativity on the field. Born on February 5, 1992, Neymar has played for clubs like Santos FC, FC Barcelona, and Paris Saint-Germain (PSG). He is recognized for his ability to take on defenders, score goals, and provide assists."
+                    }
+                ],
+                "TEST": [
+                    {
+                        "question": "Which of the following footballers is known for his incredible dribbling skills, precise finishing, and vision on the field?",
+                        "answers": [
+                            {
+                                "answer": "Lionel Messi"
+                            },
+                            {
+                                "answer": "Cristiano Ronaldo"
+                            },
+                            {
+                                "answer": "Neymar Jr."
+                            },
+                            {
+                                "answer": "Mohamed Salah"
+                            }
+                        ],
+                        "correct_answer": "Lionel Messi"
+                    }
+                ]
+            },
+            "CLUBS": {
+                "STUDY": [
+                    {
+                        "id": "1",
+                        "title": "LIONEL MESSI",
+                        "desc": "Lionel Messi has played for FC Barcelona and Paris Saint-Germain (PSG). During his time with Barcelona, Messi achieved numerous successes, including multiple UEFA Champions League and La Liga titles. In 2021, he joined PSG, continuing to showcase his exceptional talent at the highest level of the sport."
+                    }
+                ],
+                "TEST": [
+                    {
+                        "question": "In which club did Lionel Messi play before joining Paris Saint-Germain (PSG)?",
+                        "answers": [
+                            {
+                                "answer": "Real Madrid"
+                            },
+                            {
+                                "answer": "FC Barcelona"
+                            },
+                            {
+                                "answer": "Manchester United"
+                            },
+                            {
+                                "answer": "Juventus"
+                            }
+                        ],
+                        "correct_answer": "FC Barcelona"
+                    }
+                ]
+            },
+            "RULES": {
+                "STUDY": [
+                    {
+                        "id": "1",
+                        "title": "LIONEL MESSI",
+                        "desc": "Lionel Messi has consistently demonstrated adherence to fair play and sportsmanship throughout his career. Despite facing tough opponents and intense competition, Messi is known for his humility on and off the field. He has set a positive example for aspiring footballers worldwide."
+                    }
+                ],
+                "TEST": [
+                    {
+                        "question": "What is Lionel Messi known for besides his football skills?",
+                        "answers": [
+                            {
+                                "answer": "Scoring the most goals in a single season"
+                            },
+                            {
+                                "answer": "Winning multiple FIFA World Player of the Year awards"
+                            },
+                            {
+                                "answer": "Demonstrating fair play and sportsmanship"
+                            },
+                            {
+                                "answer": "Being the tallest player in his team"
+                            }
+                        ],
+                        "correct_answer": "Demonstrating fair play and sportsmanship"
+                    }
+                ]
+            }
+        },
+        "BASKETBALL": {
+            "PLAYERS": {
+                "STUDY": [
+                    {
+                        "id": "1",
+                        "title": "LIONEL MESSI",
+                        "desc": "Lionel Messi is an Argentine professional footballer widely considered one of the greatest players of all time. Born on June 24, 1987, Messi spent the majority of his career playing for FC Barcelona before joining Paris Saint-Germain (PSG) in 2021. He is known for his incredible dribbling skills, precise finishing, and vision on the field."
+                    },
+                    {
+                        "id": "2",
+                        "title": "CRISTIANO RONALDO",
+                        "desc": "Cristiano Ronaldo is a Portuguese professional footballer regarded as one of the greatest goal scorers in the history of the sport. Born on February 5, 1985, Ronaldo has had successful stints with Sporting CP, Manchester United, Real Madrid, and Juventus. Known for his athleticism and goal-scoring prowess, he has won multiple FIFA Ballon d'Or awards."
+                    },
+                    {
+                        "id": "3",
+                        "title": "NEYMAR JR.",
+                        "desc": "Neymar Jr. is a Brazilian professional footballer known for his flair, skill, and creativity on the field. Born on February 5, 1992, Neymar has played for clubs like Santos FC, FC Barcelona, and Paris Saint-Germain (PSG). He is recognized for his ability to take on defenders, score goals, and provide assists."
+                    }
+                ],
+                "TEST": [
+                    {
+                        "question": "Which of the following footballers is known for his incredible dribbling skills, precise finishing, and vision on the field?",
+                        "answers": [
+                            {
+                                "answer": "Lionel Messi"
+                            },
+                            {
+                                "answer": "Cristiano Ronaldo"
+                            },
+                            {
+                                "answer": "Neymar Jr."
+                            },
+                            {
+                                "answer": "Mohamed Salah"
+                            }
+                        ],
+                        "correct_answer": "Lionel Messi"
+                    }
+                ]
+            },
+            "CLUBS": {
+                "STUDY": [
+                    {
+                        "id": "1",
+                        "title": "LIONEL MESSI",
+                        "desc": "Lionel Messi has played for FC Barcelona and Paris Saint-Germain (PSG). During his time with Barcelona, Messi achieved numerous successes, including multiple UEFA Champions League and La Liga titles. In 2021, he joined PSG, continuing to showcase his exceptional talent at the highest level of the sport."
+                    }
+                ],
+                "TEST": [
+                    {
+                        "question": "In which club did Lionel Messi play before joining Paris Saint-Germain (PSG)?",
+                        "answers": [
+                            {
+                                "answer": "Real Madrid"
+                            },
+                            {
+                                "answer": "FC Barcelona"
+                            },
+                            {
+                                "answer": "Manchester United"
+                            },
+                            {
+                                "answer": "Juventus"
+                            }
+                        ],
+                        "correct_answer": "FC Barcelona"
+                    }
+                ]
+            },
+            "RULES": {
+                "STUDY": [
+                    {
+                        "id": "1",
+                        "title": "LIONEL MESSI",
+                        "desc": "Lionel Messi has consistently demonstrated adherence to fair play and sportsmanship throughout his career. Despite facing tough opponents and intense competition, Messi is known for his humility on and off the field. He has set a positive example for aspiring footballers worldwide."
+                    }
+                ],
+                "TEST": [
+                    {
+                        "question": "What is Lionel Messi known for besides his football skills?",
+                        "answers": [
+                            {
+                                "answer": "Scoring the most goals in a single season"
+                            },
+                            {
+                                "answer": "Winning multiple FIFA World Player of the Year awards"
+                            },
+                            {
+                                "answer": "Demonstrating fair play and sportsmanship"
+                            },
+                            {
+                                "answer": "Being the tallest player in his team"
+                            }
+                        ],
+                        "correct_answer": "Demonstrating fair play and sportsmanship"
+                    }
+                ]
+            }
+        },
+        "MIXED": {
+            "PLAYERS": {
+                "STUDY": [
+                    {
+                        "id": "1",
+                        "title": "LIONEL MESSI",
+                        "desc": "Lionel Messi is an Argentine professional footballer widely considered one of the greatest players of all time. Born on June 24, 1987, Messi spent the majority of his career playing for FC Barcelona before joining Paris Saint-Germain (PSG) in 2021. He is known for his incredible dribbling skills, precise finishing, and vision on the field."
+                    },
+                    {
+                        "title": "CRISTIANO RONALDO",
+                        "desc": "Cristiano Ronaldo is a Portuguese professional footballer regarded as one of the greatest goal scorers in the history of the sport. Born on February 5, 1985, Ronaldo has had successful stints with Sporting CP, Manchester United, Real Madrid, and Juventus. Known for his athleticism and goal-scoring prowess, he has won multiple FIFA Ballon d'Or awards."
+                    },
+                    {
+                        "title": "NEYMAR JR.",
+                        "desc": "Neymar Jr. is a Brazilian professional footballer known for his flair, skill, and creativity on the field. Born on February 5, 1992, Neymar has played for clubs like Santos FC, FC Barcelona, and Paris Saint-Germain (PSG). He is recognized for his ability to take on defenders, score goals, and provide assists."
+                    }
+                ],
+                "TEST": [
+                    {
+                        "question": "Which of the following footballers is known for his incredible dribbling skills, precise finishing, and vision on the field?",
+                        "answers": [
+                            {
+                                "answer": "Lionel Messi"
+                            },
+                            {
+                                "answer": "Cristiano Ronaldo"
+                            },
+                            {
+                                "answer": "Neymar Jr."
+                            },
+                            {
+                                "answer": "Mohamed Salah"
+                            }
+                        ],
+                        "correct_answer": "Lionel Messi"
+                    }
+                ]
+            },
+            "CLUBS": {
+                "STUDY": [
+                    {
+                        "id": "1",
+                        "title": "LIONEL MESSI",
+                        "desc": "Lionel Messi has played for FC Barcelona and Paris Saint-Germain (PSG). During his time with Barcelona, Messi achieved numerous successes, including multiple UEFA Champions League and La Liga titles. In 2021, he joined PSG, continuing to showcase his exceptional talent at the highest level of the sport."
+                    }
+                ],
+                "TEST": [
+                    {
+                        "question": "In which club did Lionel Messi play before joining Paris Saint-Germain (PSG)?",
+                        "answers": [
+                            {
+                                "answer": "Real Madrid"
+                            },
+                            {
+                                "answer": "FC Barcelona"
+                            },
+                            {
+                                "answer": "Manchester United"
+                            },
+                            {
+                                "answer": "Juventus"
+                            }
+                        ],
+                        "correct_answer": "FC Barcelona"
+                    }
+                ]
+            },
+            "RULES": {
+                "STUDY": [
+                    {
+                        "id": "1",
+                        "title": "LIONEL MESSI",
+                        "desc": "Lionel Messi has consistently demonstrated adherence to fair play and sportsmanship throughout his career. Despite facing tough opponents and intense competition, Messi is known for his humility on and off the field. He has set a positive example for aspiring footballers worldwide."
+                    }
+                ],
+                "TEST": [
+                    {
+                        "question": "What is Lionel Messi known for besides his football skills?",
+                        "answers": [
+                            {
+                                "answer": "Scoring the most goals in a single season"
+                            },
+                            {
+                                "answer": "Winning multiple FIFA World Player of the Year awards"
+                            },
+                            {
+                                "answer": "Demonstrating fair play and sportsmanship"
+                            },
+                            {
+                                "answer": "Being the tallest player in his team"
+                            }
+                        ],
+                        "correct_answer": "Demonstrating fair play and sportsmanship"
+                    }
+                ]
+            }
+        }
+    }
+]
