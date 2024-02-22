@@ -158,53 +158,97 @@ struct SelectionModel {
         }
     }
     
+//    static func getSelectStudy(selectedSport: String, selectedCategory: String, selectedStudyTest: String) -> [StudyData] {
+//        if selectedSport == "FOOTBALL" {
+//            if selectedCategory == "PLAYERS" {
+//                if selectedStudyTest == "STUDY" {
+//                    return convertToStudyData(from: SelectionModel.data.football.players.study)
+//                } else {}
+//            }
+//        } else if selectedCategory == "CLUBS" {
+//            if selectedStudyTest == "STUDY" {
+//                return convertToStudyData(from: SelectionModel.data.football.clubs.study)
+//            }  else {}
+//        } else if selectedCategory == "RULES" {
+//            if selectedStudyTest == "STUDY" {
+//                return convertToStudyData(from: SelectionModel.data.football.rules.study)
+//            }  else {}
+//            
+//        } else if selectedSport == "BASKETBALL" {
+//            if selectedCategory == "PLAYERS" {
+//                if selectedStudyTest == "STUDY" {
+//                    return convertToStudyData(from: SelectionModel.data.basketball.players.study)
+//                }  else {}
+//            } else if selectedCategory == "CLUBS" {
+//                if selectedStudyTest == "STUDY" {
+//                    return convertToStudyData(from: SelectionModel.data.basketball.clubs.study)
+//                }  else {}
+//            } else if selectedCategory == "RULES" {
+//                if selectedStudyTest == "STUDY" {
+//                    return convertToStudyData(from: SelectionModel.data.basketball.rules.study)
+//                }  else {}
+//            }
+//        } else if selectedSport == "MIXED" {
+//            if selectedCategory == "PLAYERS" {
+//                if selectedStudyTest == "STUDY" {
+//                    return convertToStudyData(from: SelectionModel.data.mixed.players.study)
+//                }  else {}
+//            } else if selectedCategory == "CLUBS" {
+//                if selectedStudyTest == "STUDY" {
+//                    return convertToStudyData(from: SelectionModel.data.mixed.clubs.study)
+//                }  else {}
+//            } else if selectedCategory == "RULES" {
+//                if selectedStudyTest == "STUDY" {
+//                    return convertToStudyData(from: SelectionModel.data.mixed.rules.study)
+//                }  else {}
+//            }
+//        }
+//        return []
+//    }
     static func getSelectStudy(selectedSport: String, selectedCategory: String, selectedStudyTest: String) -> [StudyData] {
-        if selectedSport == "FOOTBALL" {
-            if selectedCategory == "PLAYERS" {
-                if selectedStudyTest == "STUDY" {
-                    return convertToStudyData(from: SelectionModel.data.football.players.study)
-                } else {}
+        var selectedData: [StudyData] = []
+
+        switch selectedSport {
+        case "FOOTBALL":
+            switch selectedCategory {
+            case "PLAYERS":
+                selectedData = (selectedStudyTest == "STUDY") ? convertToStudyData(from: SelectionModel.data.football.players.study) : []
+            case "CLUBS":
+                selectedData = (selectedStudyTest == "STUDY") ? convertToStudyData(from: SelectionModel.data.football.clubs.study) : []
+            case "RULES":
+                selectedData = (selectedStudyTest == "STUDY") ? convertToStudyData(from: SelectionModel.data.football.rules.study) : []
+            default:
+                break
             }
-        } else if selectedCategory == "CLUBS" {
-            if selectedStudyTest == "STUDY" {
-                return convertToStudyData(from: SelectionModel.data.football.clubs.study)
-            }  else {}
-        } else if selectedCategory == "RULES" {
-            if selectedStudyTest == "STUDY" {
-                return convertToStudyData(from: SelectionModel.data.football.rules.study)
-            }  else {}
-            
-        } else if selectedSport == "BASKETBALL" {
-            if selectedCategory == "PLAYERS" {
-                if selectedStudyTest == "STUDY" {
-                    return convertToStudyData(from: SelectionModel.data.basketball.players.study)
-                }  else {}
-            } else if selectedCategory == "CLUBS" {
-                if selectedStudyTest == "STUDY" {
-                    return convertToStudyData(from: SelectionModel.data.basketball.clubs.study)
-                }  else {}
-            } else if selectedCategory == "RULES" {
-                if selectedStudyTest == "STUDY" {
-                    return convertToStudyData(from: SelectionModel.data.basketball.rules.study)
-                }  else {}
+        case "BASKETBALL":
+            switch selectedCategory {
+            case "PLAYERS":
+                selectedData = (selectedStudyTest == "STUDY") ? convertToStudyData(from: SelectionModel.data.basketball.players.study) : []
+            case "CLUBS":
+                selectedData = (selectedStudyTest == "STUDY") ? convertToStudyData(from: SelectionModel.data.basketball.clubs.study) : []
+            case "RULES":
+                selectedData = (selectedStudyTest == "STUDY") ? convertToStudyData(from: SelectionModel.data.basketball.rules.study) : []
+            default:
+                break
             }
-        } else if selectedSport == "MIXED" {
-            if selectedCategory == "PLAYERS" {
-                if selectedStudyTest == "STUDY" {
-                    return convertToStudyData(from: SelectionModel.data.mixed.players.study)
-                }  else {}
-            } else if selectedCategory == "CLUBS" {
-                if selectedStudyTest == "STUDY" {
-                    return convertToStudyData(from: SelectionModel.data.mixed.clubs.study)
-                }  else {}
-            } else if selectedCategory == "RULES" {
-                if selectedStudyTest == "STUDY" {
-                    return convertToStudyData(from: SelectionModel.data.mixed.rules.study)
-                }  else {}
+        case "MIXED":
+            switch selectedCategory {
+            case "PLAYERS":
+                selectedData = (selectedStudyTest == "STUDY") ? convertToStudyData(from: SelectionModel.data.mixed.players.study) : []
+            case "CLUBS":
+                selectedData = (selectedStudyTest == "STUDY") ? convertToStudyData(from: SelectionModel.data.mixed.clubs.study) : []
+            case "RULES":
+                selectedData = (selectedStudyTest == "STUDY") ? convertToStudyData(from: SelectionModel.data.mixed.rules.study) : []
+            default:
+                break
             }
+        default:
+            break
         }
-        return []
+
+        return selectedData
     }
+
     
     
     static func getSelectTest(selectedSport: String, selectedCategory: String, selectedStudyTest: String) -> [TestData] {
@@ -257,438 +301,6 @@ struct SelectionModel {
 }
 
 extension SelectionModel {
-    //    static var data: Data = SelectionModel.Data(
-    //        football: SelectionModel.Data.SportData(
-    //            players: SelectionModel.Data.SportData.Players(
-    //                study: [
-    //                    SelectionModel.Data.SportData.Players.PlayerStudy(
-    //                        id: 1,
-    //                        title: "LIONEL MESSI",
-    //                        desc: """
-    //                        Lionel Messi is a renowned Argentine footballer who has won the hearts of millions of fans worldwide. He was born on June 24, 1987, in Rosario, Argentina, and began his professional career with the football club Barcelona, where he continues to play to this day. Messi holds the record for the most "Ballon d'Or" awards, a prestigious accolade presented to the world's best football player. He has won this award 6 times. In 2021, Lionel Messi led the Argentine national team to victory in the Copa America, serving as the captain and guiding his country to success in the tournament. Messi is known for his incredible football skills, flashy dribbles, and unique ball control. He has set numerous records, including the highest number of goals in a single La Liga season and the most goals in a calendar year. In 2021, Messi transferred to the Paris Saint-Germain football club after concluding his long-standing collaboration with Barcelona.
-    //                        """
-    //                    ),
-    //                    SelectionModel.Data.SportData.Players.PlayerStudy(
-    //                        id: 2,
-    //                        title: "CRISTIANO RONALDO",
-    //                        desc: "Cristiano Ronaldo is a legendary Portuguese footballer whose influence spans the globe. Born on February 5, 1985, on the island of Madeira, Ronaldo began his career with Sporting Lisbon. He then moved to Manchester United, where he won three Premier League 'Player of the Year' titles. In 2009, Ronaldo transferred to Real Madrid, becoming the club's all-time leading goal scorer. In 2018, he returned to Manchester United. Ronaldo has earned five Ballon d'Or awards, highlighting his incredible determination and professionalism. His physical prowess, accurate strikes, and outstanding on-field skills have made him one of the greatest footballers of all time."
-    //                    ),
-    //                    SelectionModel.Data.SportData.Players.PlayerStudy(
-    //                        id: 3,
-    //                        title: "NEYMAR JR.",
-    //                        desc: "Neymar Jr. is a Brazilian professional footballer known for his flair, skill, and creativity on the field. Born on February 5, 1992, Neymar has played for clubs like Santos FC, FC Barcelona, and Paris Saint-Germain (PSG). He is recognized for his ability to take on defenders, score goals, and provide assists."
-    //                    )
-    //                ],
-    //                test: [
-    //                    SelectionModel.Data.SportData.Players.PlayerTest(
-    //                        study_id: 1,
-    //                        question: "In which city was Lionel Messi born?",
-    //                        answers: [
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Buenos Aires"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Rio de Janeiro"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Rosario"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Lima")
-    //                        ],
-    //                        correctAnswer: "Rosario"
-    //                    ),
-    //                    SelectionModel.Data.SportData.Players.PlayerTest(
-    //                        study_id: 1,
-    //                        question: "In which football club did Lionel Messi begin his professional career?",
-    //                        answers: [
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Real Madrid"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Manchester United"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Barcelona"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "PSG")
-    //                        ],
-    //                        correctAnswer: "Barcelona"
-    //                    ),
-    //                    SelectionModel.Data.SportData.Players.PlayerTest(
-    //                        study_id: 1,
-    //                        question: "How many times has Lionel Messi won the 'Ballon d'Or' award?",
-    //                        answers: [
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "3"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "6"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "8"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "10")
-    //                        ],
-    //                        correctAnswer: "6"
-    //                    ),
-    //                    SelectionModel.Data.SportData.Players.PlayerTest(
-    //                        study_id: 1,
-    //                        question: "What title did Lionel Messi win with the Argentine national team in 2021?",
-    //                        answers: [
-    //
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "World Cup"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Copa America"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "European Cup"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "African Nations Cup")
-    //                        ],
-    //                        correctAnswer: "Copa America"
-    //                    ),
-    //                    SelectionModel.Data.SportData.Players.PlayerTest(
-    //                        study_id: 1,
-    //                        question: "What football skills make Lionel Messi famous?",
-    //                        answers: [
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Powerful shots"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Flashy dribbles"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Excellent goalkeeping skills"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "High jumps")
-    //                        ],
-    //                        correctAnswer: "Flashy dribbles"
-    //                    ),
-    //                    SelectionModel.Data.SportData.Players.PlayerTest(
-    //                        study_id: 1,
-    //                        question: "In which football club did Lionel Messi transfer to in 2021?",
-    //                        answers: [
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Barcelona"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Manchester City"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Juventus"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "PSG")
-    //                        ],
-    //                        correctAnswer: "PSG"
-    //                    ),
-    //
-    //                    SelectionModel.Data.SportData.Players.PlayerTest(
-    //                        study_id: 2,
-    //                        question: "In which year was Cristiano Ronaldo born?",
-    //                        answers: [
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "1980"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "1985"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "1990"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "1995")
-    //                        ],
-    //                        correctAnswer: "1985"
-    //                    ),
-    //                    SelectionModel.Data.SportData.Players.PlayerTest(
-    //                        study_id: 2,
-    //                        question: "In which football club did Ronaldo begin his career?",
-    //                        answers: [
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Real Madrid"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Sporting Lisbon"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Manchester United"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Barcelona")
-    //                        ],
-    //                        correctAnswer: "Sporting Lisbon"
-    //                    ),
-    //                    SelectionModel.Data.SportData.Players.PlayerTest(
-    //                        study_id: 2,
-    //                        question: "How many Ballon d'Or awards has Cristiano Ronaldo won?",
-    //                        answers: [
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "3"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "5"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "7"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "9")
-    //                        ],
-    //                        correctAnswer: "5"
-    //                    ),
-    //                    SelectionModel.Data.SportData.Players.PlayerTest(
-    //                        study_id: 2,
-    //                        question: "In which year did Ronaldo return to Manchester United?",
-    //                        answers: [
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "2010"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "2015"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "2018"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "2020")
-    //                        ],
-    //                        correctAnswer: "2021"
-    //                    ),
-    //                    SelectionModel.Data.SportData.Players.PlayerTest(
-    //                        study_id: 2,
-    //                        question: "What record did Messi set in La Liga for the highest number of goals in a single season?",
-    //                        answers: [
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Most assists"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Fastest sprint"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Most goals"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Longest throw-in")
-    //                        ],
-    //                        correctAnswer: "Most goals"
-    //                    ),
-    //                    SelectionModel.Data.SportData.Players.PlayerTest(
-    //                        study_id: 2,
-    //                        question: "In which year did Lionel Messi transfer to Paris Saint-Germain (PSG)?",
-    //                        answers: [
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "2020"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "2021"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "2019"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "2018")
-    //                        ],
-    //                        correctAnswer: "2021"
-    //                    ),
-    //                    SelectionModel.Data.SportData.Players.PlayerTest(
-    //                        study_id: 3,
-    //                        question: "In which club did Messi spend his entire professional career?3",
-    //                        answers: [
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Barcelona"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Real Madrid"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Manchester United"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "PSG")
-    //                        ],
-    //                        correctAnswer: "Barcelona"
-    //                    ),
-    //                    SelectionModel.Data.SportData.Players.PlayerTest(
-    //                        study_id: 3,
-    //                        question: "How many times has Lionel Messi won the 'Ballon d'Or' award?",
-    //                        answers: [
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "3"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "6"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "4"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "2")
-    //                        ],
-    //                        correctAnswer: "6"
-    //                    ),
-    //                    SelectionModel.Data.SportData.Players.PlayerTest(
-    //                        study_id: 3,
-    //                        question: "In which year did Messi lead Argentina to victory in the Copa America?",
-    //                        answers: [
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "2019"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "2021"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "2018"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "2020")
-    //                        ],
-    //                        correctAnswer: "2021"
-    //                    ),
-    //                    SelectionModel.Data.SportData.Players.PlayerTest(
-    //                        study_id: 3,
-    //                        question: "What is Messi known for besides his football skills?",
-    //                        answers: [
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Tennis expertise"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Exceptional singing talent"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Flashy dribbles"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Cooking prowess")
-    //                        ],
-    //                        correctAnswer: "Flashy dribbles"
-    //                    ),
-    //                    SelectionModel.Data.SportData.Players.PlayerTest(
-    //                        study_id: 3,
-    //                        question: "What record did Messi set in La Liga for the highest number of goals in a single season?",
-    //                        answers: [
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Most assists"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Fastest sprint"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Most goals"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Longest throw-in")
-    //                        ],
-    //                        correctAnswer: "Most goals"
-    //                    ),
-    //                    SelectionModel.Data.SportData.Players.PlayerTest(
-    //                        study_id: 3,
-    //                        question: "In which year did Lionel Messi transfer to Paris Saint-Germain (PSG)?",
-    //                        answers: [
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "2020"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "2021"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "2019"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "2018")
-    //                        ],
-    //                        correctAnswer: "2021"
-    //                    ),
-    //
-    //                ]
-    //            ),
-    //            clubs: SelectionModel.Data.SportData.Clubs(
-    //                study: [
-    //                    SelectionModel.Data.SportData.Clubs.ClubStudy(
-    //                        id: 1,
-    //                        title: "LIONEL MESSI",
-    //                        desc: "Lionel Messi has played for FC Barcelona and Paris Saint-Germain (PSG). During his time with Barcelona, Messi achieved numerous successes, including multiple UEFA Champions League and La Liga titles. In 2021, he joined PSG, continuing to showcase his exceptional talent at the highest level of the sport."
-    //                    )
-    //                ],
-    //                test: [
-    //                    SelectionModel.Data.SportData.Clubs.ClubTest(
-    //                        study_id: 1,
-    //                        question: "In which club did Lionel Messi play before joining Paris Saint-Germain (PSG)?",
-    //                        answers: [
-    //                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Real Madrid"),
-    //                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "FC Barcelona"),
-    //                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Manchester United"),
-    //                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Juventus")
-    //                        ],
-    //                        correctAnswer: "FC Barcelona"
-    //                    )
-    //                ]
-    //            ),
-    //            rules: SelectionModel.Data.SportData.Rules(
-    //                study: [
-    //                    SelectionModel.Data.SportData.Rules.RulesStudy(
-    //                        id: 1,
-    //                        title: "LIONEL MESSI",
-    //                        desc: "Lionel Messi has consistently demonstrated adherence to fair play and sportsmanship throughout his career. Despite facing tough opponents and intense competition, Messi is known for his humility on and off the field. He has set a positive example for aspiring footballers worldwide."
-    //                    )
-    //                ],
-    //                test: [
-    //                    SelectionModel.Data.SportData.Rules.RulesTest(
-    //                        study_id: 1,
-    //                        question: "What is Lionel Messi known for besides his football skills?",
-    //                        answers: [
-    //                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Scoring the most goals in a single season"),
-    //                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Winning multiple FIFA World Player of the Year awards"),
-    //                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Demonstrating fair play and sportsmanship"),
-    //                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Being the tallest player in his team")
-    //                        ],
-    //                        correctAnswer: "Demonstrating fair play and sportsmanship"
-    //                    )
-    //                ]
-    //            )
-    //        ),
-    //        basketball: SelectionModel.Data.SportData (
-    //            players: SelectionModel.Data.SportData.Players(
-    //                study: [
-    //                    SelectionModel.Data.SportData.Players.PlayerStudy(
-    //                        id: 1,
-    //                        title: "LIONEL MESSI",
-    //                        desc: """
-    //Lionel Messi is a renowned Argentine footballer who has captured the hearts of millions of fans worldwide. Born on June 24, 1987, in Rosario, Argentina, Messi began his professional career with the football club Barcelona, where he continues to play to this day. Messi holds the record for the most 'Ballon d'Or' awards, a prestigious accolade given to the world's best football player, having won it six times. In 2021, Lionel Messi led the Argentine national team to victory in the Copa America, serving as the captain and guiding his country to triumph in the tournament. Messi is widely recognized for his incredible football skills, flashy dribbles, and unique ball control. He has set numerous records, including the highest number of goals in a single La Liga season and the most goals in a calendar year. In 2021, Messi transferred to the Paris Saint-Germain (PSG) football club after concluding his long-standing association with Barcelona.
-    //"""
-    //                    ),
-    //                    SelectionModel.Data.SportData.Players.PlayerStudy(
-    //                        id: 2,
-    //                        title: "CRISTIANO RONALDO",
-    //                        desc: "Cristiano Ronaldo is a Portuguese professional footballer regarded as one of the greatest goal scorers in the history of the sport. Born on February 5, 1985, Ronaldo has had successful stints with Sporting CP, Manchester United, Real Madrid, and Juventus. Known for his athleticism and goal-scoring prowess, he has won multiple FIFA Ballon d'Or awards."
-    //                    ),
-    //                    SelectionModel.Data.SportData.Players.PlayerStudy(
-    //                        id: 3,
-    //                        title: "NEYMAR JR.",
-    //                        desc: "Neymar Jr. is a Brazilian professional footballer known for his flair, skill, and creativity on the field. Born on February 5, 1992, Neymar has played for clubs like Santos FC, FC Barcelona, and Paris Saint-Germain (PSG). He is recognized for his ability to take on defenders, score goals, and provide assists."
-    //                    )
-    //                ],
-    //                test: [
-    //                    SelectionModel.Data.SportData.Players.PlayerTest(
-    //                        study_id: 1,
-    //                        question: "Which of the following footballers is known for his incredible dribbling skills, precise finishing, and vision on the field?",
-    //                        answers: [
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Lionel Messi"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Cristiano Ronaldo"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Neymar Jr."),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Mohamed Salah")
-    //                        ],
-    //                        correctAnswer: "Lionel Messi"
-    //                    )
-    //                ]
-    //            ),
-    //            clubs: SelectionModel.Data.SportData.Clubs(
-    //                study: [
-    //                    SelectionModel.Data.SportData.Clubs.ClubStudy(
-    //                        id: 1,
-    //                        title: "LIONEL MESSI",
-    //                        desc: "Lionel Messi has played for FC Barcelona and Paris Saint-Germain (PSG). During his time with Barcelona, Messi achieved numerous successes, including multiple UEFA Champions League and La Liga titles. In 2021, he joined PSG, continuing to showcase his exceptional talent at the highest level of the sport."
-    //                    )
-    //                ],
-    //                test: [
-    //                    SelectionModel.Data.SportData.Clubs.ClubTest(
-    //                        study_id: 1,
-    //                        question: "In which club did Lionel Messi play before joining Paris Saint-Germain (PSG)?",
-    //                        answers: [
-    //                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Real Madrid"),
-    //                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "FC Barcelona"),
-    //                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Manchester United"),
-    //                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Juventus")
-    //                        ],
-    //                        correctAnswer: "FC Barcelona"
-    //                    )
-    //                ]
-    //            ),
-    //            rules: SelectionModel.Data.SportData.Rules(
-    //                study: [
-    //                    SelectionModel.Data.SportData.Rules.RulesStudy(
-    //                        id: 2,
-    //                        title: "LIONEL MESSI",
-    //                        desc: "Lionel Messi has consistently demonstrated adherence to fair play and sportsmanship throughout his career. Despite facing tough opponents and intense competition, Messi is known for his humility on and off the field. He has set a positive example for aspiring footballers worldwide."
-    //                    )
-    //                ],
-    //                test: [
-    //                    SelectionModel.Data.SportData.Rules.RulesTest(
-    //                        study_id: 1,
-    //                        question: "What is Lionel Messi known for besides his football skills?",
-    //                        answers: [
-    //                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Scoring the most goals in a single season"),
-    //                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Winning multiple FIFA World Player of the Year awards"),
-    //                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Demonstrating fair play and sportsmanship"),
-    //                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Being the tallest player in his team")
-    //                        ],
-    //                        correctAnswer: "Demonstrating fair play and sportsmanship"
-    //                    )
-    //                ]
-    //            )
-    //        ),
-    //        mixed: SelectionModel.Data.SportData (
-    //            players: SelectionModel.Data.SportData.Players(
-    //                study: [
-    //                    SelectionModel.Data.SportData.Players.PlayerStudy(
-    //                        id: 2,
-    //                        title: "LIONEL MESSI",
-    //                        desc: "Lionel Messi is an Argentine professional footballer widely considered one of the greatest players of all time. Born on June 24, 1987, Messi spent the majority of his career playing for FC Barcelona before joining Paris Saint-Germain (PSG) in 2021. He is known for his incredible dribbling skills, precise finishing, and vision on the field."
-    //                    ),
-    //                    SelectionModel.Data.SportData.Players.PlayerStudy(
-    //                        id: 2,
-    //                        title: "CRISTIANO RONALDO",
-    //                        desc: "Cristiano Ronaldo is a Portuguese professional footballer regarded as one of the greatest goal scorers in the history of the sport. Born on February 5, 1985, Ronaldo has had successful stints with Sporting CP, Manchester United, Real Madrid, and Juventus. Known for his athleticism and goal-scoring prowess, he has won multiple FIFA Ballon d'Or awards."
-    //                    ),
-    //                    SelectionModel.Data.SportData.Players.PlayerStudy(
-    //                        id: 3,
-    //                        title: "NEYMAR JR.",
-    //                        desc: "Neymar Jr. is a Brazilian professional footballer known for his flair, skill, and creativity on the field. Born on February 5, 1992, Neymar has played for clubs like Santos FC, FC Barcelona, and Paris Saint-Germain (PSG). He is recognized for his ability to take on defenders, score goals, and provide assists."
-    //                    )
-    //                ],
-    //                test: [
-    //                    SelectionModel.Data.SportData.Players.PlayerTest(
-    //                        study_id: 1,
-    //                        question: "Which of the following footballers is known for his incredible dribbling skills, precise finishing, and vision on the field?",
-    //                        answers: [
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Lionel Messi"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Cristiano Ronaldo"),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Neymar Jr."),
-    //                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Mohamed Salah")
-    //                        ],
-    //                        correctAnswer: "Lionel Messi"
-    //                    )
-    //                ]
-    //            ),
-    //            clubs: SelectionModel.Data.SportData.Clubs(
-    //                study: [
-    //                    SelectionModel.Data.SportData.Clubs.ClubStudy(
-    //                        id: 1,
-    //                        title: "LIONEL MESSI",
-    //                        desc: "Lionel Messi has played for FC Barcelona and Paris Saint-Germain (PSG). During his time with Barcelona, Messi achieved numerous successes, including multiple UEFA Champions League and La Liga titles. In 2021, he joined PSG, continuing to showcase his exceptional talent at the highest level of the sport."
-    //                    )
-    //                ],
-    //                test: [
-    //                    SelectionModel.Data.SportData.Clubs.ClubTest(
-    //                        study_id: 1,
-    //                        question: "In which club did Lionel Messi play before joining Paris Saint-Germain (PSG)?",
-    //                        answers: [
-    //                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Real Madrid"),
-    //                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "FC Barcelona"),
-    //                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Manchester United"),
-    //                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Juventus")
-    //                        ],
-    //                        correctAnswer: "FC Barcelona"
-    //                    )
-    //                ]
-    //            ),
-    //            rules: SelectionModel.Data.SportData.Rules(
-    //                study: [
-    //                    SelectionModel.Data.SportData.Rules.RulesStudy(
-    //                        id: 1,
-    //                        title: "LIONEL MESSI",
-    //                        desc: "Lionel Messi has consistently demonstrated adherence to fair play and sportsmanship throughout his career. Despite facing tough opponents and intense competition, Messi is known for his humility on and off the field. He has set a positive example for aspiring footballers worldwide."
-    //                    )
-    //                ],
-    //                test: [
-    //                    SelectionModel.Data.SportData.Rules.RulesTest(
-    //                        study_id: 1,
-    //                        question: "What is Lionel Messi known for besides his football skills?",
-    //                        answers: [
-    //                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Scoring the most goals in a single season"),
-    //                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Winning multiple FIFA World Player of the Year awards"),
-    //                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Demonstrating fair play and sportsmanship"),
-    //                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Being the tallest player in his team")
-    //                        ],
-    //                        correctAnswer: "Demonstrating fair play and sportsmanship"
-    //                    )
-    //                ]
-    //            )
-    //        )
-    //    )
-    
-    
     
     static var data: Data = SelectionModel.Data(
         football: SelectionModel.Data.SportData(
@@ -718,7 +330,7 @@ extension SelectionModel {
                         title: "Kylian Mbappé",
                         desc: "Kylian Mbappé is a French professional footballer known for his extraordinary speed, dazzling dribbling skills, and clinical finishing. Born on December 20, 1998, in Paris, Mbappé began his senior career with AS Monaco in 2015, where he quickly gained recognition for his exceptional talent. His breakthrough season came in 2016-2017 when he played a pivotal role in Monaco's Ligue 1 triumph and their impressive run to the UEFA Champions League semi-finals. Mbappé's stellar performances earned him a move to Paris Saint-Germain, where he continued to shine, winning numerous domestic titles. He has also been a key player for the French national team, helping them clinch victory in the 2018 FIFA World Cup. Mbappé's combination of skill, speed, and intelligence makes him one of the most exciting talents in world football."
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerStudy(
                         id: 5,
                         title: "Erling Haaland",
@@ -726,19 +338,19 @@ extension SelectionModel {
                                         Erling Haaland is a Norwegian professional footballer, renowned for his exceptional goal-scoring prowess and physical dominance on the field. Born on July 21, 2000, in Leeds, England, Haaland started his career at Molde FK before moving to Red Bull Salzburg, where he gained international attention with his prolific scoring record. His towering height, lightning speed, and precise finishing make him a nightmare for defenders. In 2020, he transferred to Borussia Dortmund, where he continued to impress, breaking numerous records in the Bundesliga. Haaland's performances have drawn comparisons to some of the greatest strikers in football history. His relentless work ethic and hunger for success mark him as one of the brightest talents in the sport.
                                         """
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerStudy(
                         id: 6,
                         title: "Robert Lewandowski",
                         desc: "Robert Lewandowski is a Polish professional footballer, renowned for his exceptional goal-scoring prowess and leadership on the field. Born on August 21, 1988, in Warsaw, Lewandowski began his professional career at Polish club Znicz Pruszków before moving to top-flight Polish side Lech Poznań. His impressive performances attracted attention from major European clubs, leading to his transfer to Borussia Dortmund in 2010. During his time at Dortmund, Lewandowski established himself as one of Europe's deadliest strikers, winning two Bundesliga titles and reaching the UEFA Champions League final. In 2014, he joined Bayern Munich, where he continued his prolific goal-scoring form, breaking numerous records and winning multiple Bundesliga titles and the UEFA Champions League. Lewandowski's combination of skill, determination, and leadership makes him a true icon of Polish and world football."
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerStudy(
                         id: 7,
                         title: "Mohamed Salah",
                         desc: "Mohamed Salah is an Egyptian professional footballer renowned for his explosive speed, agility, and clinical finishing. Born on June 15, 1992, Salah began his professional career in Egypt before moving to Europe. He gained prominence during his time with Basel in Switzerland and later became a household name at AS Roma in Serie A. However, it was his transfer to Liverpool in 2017 that truly propelled him to superstardom. Salah's exceptional goal-scoring record and crucial contributions have helped Liverpool secure multiple domestic and international trophies, including the Premier League and the UEFA Champions League. His impact extends beyond the pitch as he serves as an inspiration to millions of fans worldwide, particularly in Egypt, where he is considered a national hero."
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerStudy(
                         id: 8,
                         title: "Karim Benzema",
@@ -746,7 +358,7 @@ extension SelectionModel {
                                         Karim Benzema is a French professional footballer renowned for his prowess as a striker. Born on December 19, 1987, in Lyon, France, he currently plays for Real Madrid and the French national team. Benzema began his career at Lyon, where he showcased his exceptional goal-scoring abilities, earning him a move to Real Madrid in 2009. With Real Madrid, he has won numerous La Liga titles and UEFA Champions League trophies. Known for his clinical finishing, intelligent movement off the ball, and ability to link play, Benzema is a key figure in Real Madrid's attacking lineup. Despite facing controversies off the pitch, he continues to be a respected figure in the football world.
                                         """
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerStudy(
                         id: 9,
                         title: "Harry Kane",
@@ -783,7 +395,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "La Masia"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 1,
                         question: "What are some characteristics of Messi's playing style?",
@@ -795,7 +407,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Exceptional dribbling, passing, and finishing"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 1,
                         question: "How many FIFA Ballon d'Or awards has Messi won?",
@@ -807,7 +419,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Six"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 1,
                         question: "Which club did Messi join in 2021, ending his long-standing association with Barcelona?",
@@ -819,7 +431,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Paris Saint-Germain"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 1,
                         question: "Apart from his football skills, what else is Messi admired for?",
@@ -831,7 +443,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Philanthropic efforts and humility"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 2,
                         question: "Where was Cristiano Ronaldo born?",
@@ -843,7 +455,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Madeira"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 2,
                         question: "In which year did Cristiano Ronaldo join Manchester United?",
@@ -855,7 +467,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "2003"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 2,
                         question: "How many UEFA Champions League titles did Cristiano Ronaldo win with Real Madrid?",
@@ -867,7 +479,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Four"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 2,
                         question: "Which club did Cristiano Ronaldo join in 2018?",
@@ -879,7 +491,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Juventus"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 2,
                         question: "What is one of Cristiano Ronaldo's notable attributes as a footballer?",
@@ -891,7 +503,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Incredible work ethic"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 2,
                         question: "How many English Premier League titles did Cristiano Ronaldo win with Manchester United?",
@@ -903,7 +515,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Three"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 3,
                         question: "Where did Neymar begin his professional football career?",
@@ -915,7 +527,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Santos FC"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 3,
                         question: "Which club did Neymar join in 2013, forming a formidable attacking trio with Messi and Suárez?",
@@ -927,7 +539,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "FC Barcelona"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 3,
                         question: "In which year did Neymar make a record-breaking transfer to Paris Saint-Germain?",
@@ -939,7 +551,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "2017"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 3,
                         question: "What is one of Neymar's standout attributes on the football field?",
@@ -951,7 +563,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Exceptional dribbling skills"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 3,
                         question: "Which international tournaments has Neymar represented Brazil in?",
@@ -963,7 +575,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Copa América"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 3,
                         question: "How many Ligue 1 titles has Neymar won with Paris Saint-Germain?",
@@ -975,7 +587,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Four"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 4,
                         question: "Where was Kylian Mbappé born?",
@@ -987,7 +599,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Paris"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 4,
                         question: "When did Kylian Mbappé make his breakthrough in professional football?",
@@ -999,7 +611,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "2016-2017"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 4,
                         question: "Which club did Kylian Mbappé join after his successful stint with AS Monaco?",
@@ -1011,7 +623,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Paris Saint-Germain"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 4,
                         question: "In which year did Kylian Mbappé help France win the FIFA World Cup?",
@@ -1023,7 +635,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "2018"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 4,
                         question: "What position does Kylian Mbappé primarily play on the field?",
@@ -1035,7 +647,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Forward"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 4,
                         question: "What makes Kylian Mbappé one of the most exciting talents in football?",
@@ -1047,7 +659,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "His combination of skill, speed, and intelligence"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 5,
                         question: "Where was Erling Haaland born?",
@@ -1059,7 +671,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Leeds"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 5,
                         question: "Which club did Erling Haaland join in 2020?",
@@ -1071,7 +683,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Borussia Dortmund"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 5,
                         question: "What attributes contribute to Erling Haaland's success on the field?",
@@ -1083,7 +695,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Lightning speed and precise finishing"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 5,
                         question: "Prior to Borussia Dortmund, which club did Erling Haaland play for?",
@@ -1095,7 +707,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Red Bull Salzburg"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 5,
                         question: "What year was Erling Haaland born?",
@@ -1107,7 +719,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "2000"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 5,
                         question: "What is Erling Haaland's nationality?",
@@ -1119,7 +731,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Norwegian"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 6,
                         question: "Which club does Robert Lewandowski currently play for?",
@@ -1131,7 +743,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Bayern Munich"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 6,
                         question: "What position does Robert Lewandowski play?",
@@ -1143,7 +755,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Striker"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 6,
                         question: "What are Robert Lewandowski's main strengths as a footballer?",
@@ -1155,7 +767,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Exceptional goal-scoring ability, physical strength, and clinical finishing"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 6,
                         question: "Which national team does Robert Lewandowski represent?",
@@ -1167,7 +779,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Poland"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 6,
                         question: "What role has Robert Lewandowski played in Bayern Munich's success?",
@@ -1179,7 +791,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "He has been instrumental with his leadership and goal-scoring ability"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 6,
                         question: "How has Robert Lewandowski's goal-scoring record compared to other strikers?",
@@ -1191,7 +803,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "He has consistently been among the top strikers with remarkable goal-scoring statistics"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 7,
                         question: "Where was Mohamed Salah born?",
@@ -1203,7 +815,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Egypt"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 7,
                         question: "Which European club did Mohamed Salah join after gaining prominence at Basel?",
@@ -1215,7 +827,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "AS Roma"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 7,
                         question: "What is one of Mohamed Salah's notable attributes as a footballer?",
@@ -1227,7 +839,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Explosive speed and clinical finishing"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 7,
                         question: "Which major trophies has Mohamed Salah helped Liverpool win?",
@@ -1239,7 +851,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Premier League"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 7,
                         question: "What impact does Mohamed Salah have off the pitch?",
@@ -1251,7 +863,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Inspiring millions of fans worldwide"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 7,
                         question: "What is Mohamed Salah considered in Egypt?",
@@ -1263,7 +875,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "National hero"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 8,
                         question: "Where was Karim Benzema born?",
@@ -1275,7 +887,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Lyon, France"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 8,
                         question: "What team does Karim Benzema currently play for?",
@@ -1287,7 +899,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Real Madrid"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 8,
                         question: "What major European competition has Karim Benzema won with Real Madrid?",
@@ -1299,7 +911,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "UEFA Champions League"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 8,
                         question: "What role does Karim Benzema play in the team?",
@@ -1311,7 +923,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Striker"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 8,
                         question: "What distinguishes Karim Benzema as a footballer?",
@@ -1323,7 +935,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Clinical finishing and intelligent movement off the ball"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 8,
                         question: "In which year did Karim Benzema join Real Madrid?",
@@ -1335,7 +947,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "2009"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 9,
                         question: "Where was Harry Kane born?",
@@ -1347,7 +959,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "London"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 9,
                         question: "What is Harry Kane known for in football?",
@@ -1359,7 +971,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Goal-scoring prowess"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 9,
                         question: "Which club did Harry Kane emerge from the youth ranks of?",
@@ -1371,7 +983,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Tottenham Hotspur"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 9,
                         question: "What qualities contribute to Harry Kane's success as a striker?",
@@ -1383,7 +995,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Technique, vision, and physical presence"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 9,
                         question: "Which national team has Harry Kane represented?",
@@ -1395,7 +1007,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "England"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 9,
                         question: "What attributes make Harry Kane a role model for aspiring footballers?",
@@ -1407,7 +1019,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Leadership qualities and dedication"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 10,
                         question: "Where was Joshua Kimmich born?",
@@ -1419,7 +1031,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Rottweil"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 10,
                         question: "Which club did Joshua Kimmich join in 2015?",
@@ -1431,7 +1043,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Bayern Munich"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 10,
                         question: "What qualities make Joshua Kimmich an invaluable asset on the field?",
@@ -1443,7 +1055,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Precise passing and defensive capabilities"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 10,
                         question: "Has Joshua Kimmich ever captained his teams?",
@@ -1455,7 +1067,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Yes, he has captained both club and country."
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 10,
                         question: "How many Bundesliga titles has Joshua Kimmich won with Bayern Munich?",
@@ -1467,7 +1079,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Three"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 10,
                         question: "What role did Joshua Kimmich play in Germany's success at the 2014 FIFA World Cup?",
@@ -1553,7 +1165,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "1880"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 1,
                         question: "Where is Manchester City based?",
@@ -1565,7 +1177,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Manchester"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 1,
                         question: "What is Manchester City commonly referred to as?",
@@ -1577,7 +1189,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Man City"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 1,
                         question: "What is the capacity of Manchester City's home stadium, the Etihad Stadium?",
@@ -1589,7 +1201,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "55,000"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 1,
                         question: "Which league does Manchester City compete in?",
@@ -1601,7 +1213,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "English Premier League"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 1,
                         question: "What is one of Manchester City's notable achievements in recent years?",
@@ -1613,7 +1225,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Winning multiple league titles and domestic cups"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 2,
                         question: "When was Paris Saint-Germain established?",
@@ -1625,7 +1237,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "1970"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 2,
                         question: "What is the capacity of Parc des Princes stadium?",
@@ -1637,7 +1249,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Over 40,000"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 2,
                         question: "Which player is NOT mentioned as part of PSG's star-studded roster?",
@@ -1649,7 +1261,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Cristiano Ronaldo"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 2,
                         question: "In which year did PSG reach the UEFA Champions League final?",
@@ -1661,7 +1273,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "2020"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 2,
                         question: "What are the colors of Paris Saint-Germain?",
@@ -1673,7 +1285,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Red and white"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 2,
                         question: "What is the nickname of PSG's passionate fan base?",
@@ -1685,7 +1297,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Les Parisiens"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 3,
                         question: "When was Real Madrid Football Club established?",
@@ -1697,7 +1309,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "1902"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 3,
                         question: "What is the name of Real Madrid's home stadium?",
@@ -1709,7 +1321,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Santiago Bernabéu Stadium"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 3,
                         question: "Which player is often associated with Real Madrid's success?",
@@ -1721,7 +1333,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Cristiano Ronaldo"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 3,
                         question: "What is Real Madrid's nickname?",
@@ -1733,7 +1345,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "The Whites"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 3,
                         question: "In which league does Real Madrid compete?",
@@ -1745,7 +1357,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "La Liga"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 3,
                         question: "What is Real Madrid's main rivalry known as?",
@@ -1757,7 +1369,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "El Clásico"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 4,
                         question: "When was Liverpool Football Club established?",
@@ -1769,7 +1381,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "1892"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 4,
                         question: "How many UEFA Champions League titles has Liverpool won?",
@@ -1781,7 +1393,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "6"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 4,
                         question: "What is the capacity of Liverpool's home ground, Anfield?",
@@ -1793,7 +1405,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Over 50,000"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 4,
                         question: "Which anthem is associated with Liverpool FC?",
@@ -1805,7 +1417,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "You'll Never Walk Alone"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 4,
                         question: "Who is the current manager of Liverpool?",
@@ -1817,7 +1429,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Jürgen Klopp"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 4,
                         question: "Which club shares a fierce rivalry with Liverpool, known as the North West Derby?",
@@ -1829,8 +1441,8 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Manchester United"
                     ),
-                    
-                    
+
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 5,
                         question: "When was Bayern Munich Football Club established?",
@@ -1842,7 +1454,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "1900"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 5,
                         question: "In which city is Bayern Munich based?",
@@ -1854,7 +1466,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Munich"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 5,
                         question: "How many UEFA Champions League titles has Bayern Munich won?",
@@ -1866,7 +1478,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Three"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 5,
                         question: "What stadium do Bayern Munich's home matches take place in?",
@@ -1878,7 +1490,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Allianz Arena"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 5,
                         question: "What is Bayern Munich known for in terms of playing style?",
@@ -1890,7 +1502,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Attacking style of play"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 5,
                         question: "What year was Bayern Munich founded?",
@@ -1902,7 +1514,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "1900"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 6,
                         question: "When was Chelsea Football Club founded?",
@@ -1914,7 +1526,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "1905"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 6,
                         question: "What is the capacity of Stamford Bridge stadium?",
@@ -1926,7 +1538,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Over 40,000"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 6,
                         question: "Which competition has Chelsea NOT won?",
@@ -1938,7 +1550,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Serie A"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 6,
                         question: "Who is considered a Chelsea legend?",
@@ -1950,7 +1562,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Frank Lampard"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 6,
                         question: "What are the club colors of Chelsea?",
@@ -1962,7 +1574,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Blue and white"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 6,
                         question: "What are Chelsea supporters known as?",
@@ -1974,7 +1586,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "The Blues"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 7,
                         question: "When was Manchester United Football Club established?",
@@ -1986,7 +1598,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "1878"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 7,
                         question: "What is Manchester United's nickname?",
@@ -1998,7 +1610,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "The Red Devils"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 7,
                         question: "How many league titles has Manchester United won in the English top-flight?",
@@ -2010,7 +1622,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "20"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 7,
                         question: "Which stadium hosts Manchester United's home matches?",
@@ -2022,7 +1634,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Old Trafford"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 7,
                         question: "How many times has Manchester United won the UEFA Champions League?",
@@ -2034,7 +1646,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Three times"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 7,
                         question: "What is Manchester United's nickname?",
@@ -2046,7 +1658,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "The Red Devils"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 8,
                         question: "When was FC Barcelona founded?",
@@ -2058,7 +1670,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "1899"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 8,
                         question: "What is the seating capacity of Camp Nou stadium?",
@@ -2070,7 +1682,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Over 90,000"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 8,
                         question: "Who is NOT mentioned as a legendary player of FC Barcelona?",
@@ -2082,7 +1694,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Cristiano Ronaldo"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 8,
                         question: "How many UEFA Champions League trophies has Barcelona won?",
@@ -2094,7 +1706,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "5"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 8,
                         question: "What style of play is Barcelona famous for?",
@@ -2106,7 +1718,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Tiki-taka"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 8,
                         question: "What is the nickname for Barcelona's passionate fan base?",
@@ -2118,7 +1730,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Culés"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 9,
                         question: "When was Juventus Football Club founded?",
@@ -2130,7 +1742,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "1897"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 9,
                         question: "What is the name of Juventus' home stadium?",
@@ -2142,7 +1754,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Allianz Stadium"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 9,
                         question: "How many times has Juventus won the Serie A title?",
@@ -2154,7 +1766,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "36 times"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 9,
                         question: "Which player is NOT mentioned as a legendary player of Juventus?",
@@ -2166,7 +1778,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Lionel Messi"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 9,
                         question: "What are the colors of Juventus' home jersey?",
@@ -2178,7 +1790,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Black and white"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 9,
                         question: "What is Juventus' nickname?",
@@ -2190,8 +1802,8 @@ extension SelectionModel {
                         ],
                         correctAnswer: "The Old Lady"
                     ),
-                    
-                    
+
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 10,
                         question: "When was Borussia Dortmund founded?",
@@ -2203,7 +1815,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "1909"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 10,
                         question: "In which league does Borussia Dortmund compete?",
@@ -2215,7 +1827,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Bundesliga"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 10,
                         question: "What are Borussia Dortmund's team colors?",
@@ -2227,7 +1839,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Yellow and black"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 10,
                         question: "Where does Borussia Dortmund play their home matches?",
@@ -2239,7 +1851,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Signal Iduna Park"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 10,
                         question: "How many UEFA Champions League titles has Borussia Dortmund won?",
@@ -2251,7 +1863,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "One"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Clubs.ClubTest(
                         study_id: 10,
                         question: "What is Borussia Dortmund known for in terms of their style of play?",
@@ -2267,950 +1879,724 @@ extension SelectionModel {
             ),
             rules: SelectionModel.Data.SportData.Rules(
                 study: [
-                    SelectionModel.Data.SportData.Rules.RulesStudy(
-                        id: 1,
-                        title: "Manchester City",
-                        desc: "Manchester City Football Club, commonly referred to as Man City, follows a set of rules and regulations to ensure fair play and sportsmanship on and off the field. These rules govern various aspects of the club's operations, including player conduct, financial management, and adherence to league regulations. Man City emphasizes integrity, respect, and professionalism among its players, staff, and supporters. The club upholds the principles of fair play and strives for excellence in all competitions. Manchester City's rules aim to maintain a positive and inclusive environment for everyone involved with the club, fostering a sense of community and unity among fans worldwide."
-                    ),
-                    
-                    SelectionModel.Data.SportData.Rules.RulesStudy(
-                        id: 2,
-                        title: "Paris Saint-Germain",
-                        desc: """
-                                        Paris Saint-Germain (PSG) is a prestigious football club with a set of rules that govern its operations:
-                                        Respect: Players are expected to show respect to teammates, coaches, opponents, and officials both on and off the field.
-                                        Discipline: PSG emphasizes discipline, requiring players to adhere to training schedules, team meetings, and club policies.
-                                        Integrity: Integrity is crucial, with players expected to uphold the values of fair play and sportsmanship.
-                                        Professionalism: Players are representatives of PSG and are expected to maintain a professional demeanor in all interactions.
-                                        Commitment: Dedication to the club's goals and objectives is essential, including giving maximum effort during training and matches.
-                                        Teamwork: PSG values teamwork and cooperation among players to achieve success collectively.
-                                        Loyalty: Players are expected to demonstrate loyalty to the club and its supporters.
-                                        """
-                    ),
-                    
-                    SelectionModel.Data.SportData.Rules.RulesStudy(
-                        id: 3,
-                        title: "Real Madrid",
-                        desc: """
-                                        Real Madrid, one of the most successful football clubs globally, has a set of rules that guide its operations and conduct:
-                                        
-                                        Respect for Tradition: Real Madrid upholds its rich history and traditions, honoring past achievements and legends.
-                                        
-                                        Commitment to Excellence: The club strives for excellence in every aspect, whether it's on the field, in management, or in serving its fanbase.
-                                        
-                                        Sportsmanship: Real Madrid values fair play and sportsmanship, promoting integrity and respect for opponents.
-                                        
-                                        Unity and Teamwork: Team cohesion and collaboration are essential values, fostering a sense of unity among players and staff.
-                                        
-                                        Continuous Improvement: The club is dedicated to constant growth and development, seeking to improve both individually and collectively.
-                                        
-                                        Community Engagement: Real Madrid actively engages with its community, using its platform to make a positive impact beyond football.
-                                        
-                                        Financial Responsibility: The club manages its finances prudently, ensuring sustainability and long-term success.
-                                        
-                                        Global Representation: Real Madrid embraces its global fanbase, aiming to represent and connect with supporters worldwide.
-                                        """
-                    ),
-                    
-                    SelectionModel.Data.SportData.Rules.RulesStudy(
-                        id: 4,
-                        title: "Liverpool",
-                        desc: """
-                                        Liverpool Football Club, founded in 1892, has a rich history and a set of rules that have evolved over time. These rules govern the conduct of players, staff, and fans associated with the club. Here's an overview of Liverpool's rules:
-                                        
-                                        Respect for the game: Players and staff must uphold the integrity of football and adhere to fair play principles.
-                                        Loyalty: Members are expected to demonstrate unwavering loyalty to the club and its values.
-                                        Sportsmanship: Displaying good sportsmanship on and off the field is paramount.
-                                        Discipline: Any breaches of club rules or misconduct are subject to disciplinary action.
-                                        Unity: Fostering a sense of unity and teamwork among players, staff, and supporters is crucial.
-                                        Respect for opponents: While striving for victory, it's important to respect the opposition and their supporters.
-                                        Representation: Players and staff are ambassadors for the club and must represent it with dignity and respect.
-                                        """
-                    ),
-                    
-                    SelectionModel.Data.SportData.Rules.RulesStudy(
-                        id: 5,
-                        title: "Bayern Munich",
-                        desc: """
-                                        Bayern Munich, one of the most successful football clubs globally, follows specific rules governing its operations. These rules include financial regulations, ethical conduct, and adherence to football governing bodies' guidelines. Financial Fair Play regulations ensure the club's financial sustainability and prevent excessive spending beyond its means. Ethical conduct mandates fair treatment of players, staff, and stakeholders, promoting integrity and respect within the club and the broader football community. Bayern Munich also abides by FIFA and UEFA regulations regarding player transfers, youth development, and participation in competitions. Additionally, the club emphasizes environmental sustainability and community engagement, contributing positively to society. These rules uphold Bayern Munich's reputation as a prestigious and responsible football institution, fostering success on and off the pitch.
-                                        """
-                    ),
-                    
-                    SelectionModel.Data.SportData.Rules.RulesStudy(
-                        id: 6,
-                        title: "Chelsea",
-                        desc: "Chelsea Football Club adheres to a comprehensive set of rules and regulations to ensure fair play, integrity, and professionalism both on and off the pitch. These rules govern various aspects of the club's operations, including player conduct, financial management, and compliance with league regulations. Chelsea prioritizes inclusivity, respect, and community engagement, aiming to create a positive and supportive environment for players, staff, and supporters alike. The club emphasizes the development of young talent through its renowned academy system while also striving for success in domestic and international competitions. Chelsea's rules underscore the importance of accountability, discipline, and adherence to ethical standards, reflecting the club's commitment to excellence in all endeavors."
-                    ),
-                    
-                    SelectionModel.Data.SportData.Rules.RulesStudy(
-                        id: 7,
-                        title: "Manchester United",
-                        desc: """
-                                        Founded in 1878, Manchester United has established itself as a powerhouse in English and European football. The club adheres to strict guidelines, including promoting fair play, respect for opponents, and sportsmanship on and off the field. Players are expected to uphold the club's values, maintain professionalism, and show commitment to the team's success. Manchester United's rules also encompass disciplinary measures for misconduct, outlining penalties for violations such as violent conduct, dissent, and unsporting behavior. Additionally, the club emphasizes the importance of integrity, community engagement, and upholding its reputation as a global football institution. Through these principles, Manchester United aims to inspire fans, promote inclusivity, and uphold the spirit of the game.
-                                        """
-                    ),
-                    
-                    SelectionModel.Data.SportData.Rules.RulesStudy(
-                        id: 8,
-                        title: "Barcelona",
-                        desc: """
-                                        
-                                        Barcelona, a city renowned for its vibrant culture and rich history, had its own set of rules governing its inhabitants' conduct during the 17th century. These regulations aimed to maintain order and uphold societal norms within the bustling city.
-                                        
-                                        Curfew: Citizens were expected to abide by a strict curfew, ensuring that the streets were clear and quiet after a certain hour to prevent disturbances and maintain safety.
-                                        
-                                        Dress Code: There were regulations dictating appropriate attire, particularly for different social classes, to preserve decorum and status distinctions.
-                                        
-                                        Trade Restrictions: Barcelona had regulations regarding trade and commerce, often enforced to protect local businesses and maintain economic stability.
-                                        
-                                        Religious Observance: Attendance at religious services and adherence to religious festivals and customs were mandatory, reflecting the strong influence of Catholicism in Barcelona society.
-                                        
-                                        Public Behavior: Respectful behavior towards authorities, fellow citizens, and public property was expected, with penalties for those who engaged in disorderly conduct or vandalism.
-                                        
-                                        Civic Duty: Citizens were obligated to participate in civic duties such as community projects, upkeep of public spaces, and defense efforts during times of crisis.
-                                        """
-                    ),
-                    
-                    SelectionModel.Data.SportData.Rules.RulesStudy(
-                        id: 9,
-                        title: "Juventus",
-                        desc: """
-                                        Respect for Tradition: Juventus players are expected to uphold the rich history and traditions of the club both on and off the field.
-                                        Commitment to Excellence: Every member of Juventus is dedicated to achieving excellence in their performance, continuously striving to improve and succeed.
-                                        Team Spirit: Collaboration and unity are key values at Juventus, with players encouraged to support and uplift their teammates at all times.
-                                        Discipline and Professionalism: Players adhere to strict discipline and maintain a high level of professionalism in all aspects of their conduct.
-                                        Adherence to Tactics: Juventus follows a specific style of play and tactical approach, with players expected to understand and execute these strategies effectively.
-                                        Respect for Fans: Juventus players recognize the importance of their supporters and always show appreciation for their loyalty and passion.
-                                        """
-                    ),
-                    
-                    SelectionModel.Data.SportData.Rules.RulesStudy(
-                        id: 10,
-                        title: "Borussia Dortmund",
-                        desc: """
-                                        Borussia Dortmund, a professional football club based in Dortmund, Germany, follows a set of rules and principles both on and off the field. The club places a strong emphasis on youth development, striving to nurture young talents through its renowned academy system. Dortmund is known for its passionate fan base, who adhere to the principles of respect and fair play. The club promotes an attacking style of football, characterized by quick transitions and high pressing. Dortmund's iconic yellow and black colors adorn the Signal Iduna Park, their home stadium, which boasts one of the most electrifying atmospheres in European football. Additionally, Borussia Dortmund is committed to sustainability initiatives and community engagement, aiming to make a positive impact beyond the realm of football.
-                                        """
-                    )
-                ],
+                        SelectionModel.Data.SportData.Rules.RulesStudy(
+                            id: 1,
+                            title: "Offside Rule in Football",
+                            desc: "The offside rule is a fundamental aspect of football, designed to ensure fair play and maintain the integrity of the game. A player is considered offside if they are nearer to the opponent's goal line than both the ball and the second-to-last defender when the ball is played to them. Exceptions include being in their own half, level with the second-to-last defender, or level with the last two defenders. Understanding and applying the offside rule is crucial for players, coaches, and fans, shaping the dynamics of goal-scoring opportunities and strategic gameplay."
+                        ),
+                        SelectionModel.Data.SportData.Rules.RulesStudy(
+                            id: 2,
+                            title: "Fouls and Free Kicks in Football",
+                            desc: "Fouls and free kicks are integral parts of football, ensuring a fair and safe playing environment. Players commit fouls through actions like tripping, pushing, or handling the ball with hands. When a foul occurs, the opposing team is awarded a free kick. This rule governs player conduct, promoting sportsmanship and strategic gameplay. Understanding the nuances of fouls and free kicks is essential for players to navigate the game effectively and for referees to enforce fair competition."
+                        ),
+                        SelectionModel.Data.SportData.Rules.RulesStudy(
+                            id: 3,
+                            title: "Handball Violation in Football",
+                            desc: "Handball violations occur in football when a player intentionally handles the ball with their hand or arm. The rules define various situations, including gaining an unfair advantage or scoring a goal with the hand. Referees use video assistance to make accurate decisions in contentious handball situations. Understanding the handball rule is crucial for players, officials, and fans, as it influences match outcomes and contributes to the overall fairness of the game."
+                        ),
+                        SelectionModel.Data.SportData.Rules.RulesStudy(
+                            id: 4,
+                            title: "Penalty Kick Rule in Football",
+                            desc: "The penalty kick is a significant rule in football, awarded when a defensive player commits a foul inside their penalty area. The fouled team is given a direct free shot from the penalty spot, 12 yards away from the goal. It's a one-on-one duel between the kicker and the goalkeeper. The penalty kick is a crucial moment that can change the course of a match, making it essential for players, coaches, and fans to understand the rules governing penalty kicks."
+                        ),
+                        SelectionModel.Data.SportData.Rules.RulesStudy(
+                            id: 5,
+                            title: "Yellow and Red Card System in Football",
+                            desc: "The yellow and red card system is a disciplinary measure in football to control player behavior. A yellow card is a caution for a minor offense, while a red card signifies a serious offense, resulting in the player's ejection from the game. Accumulating yellow cards can lead to a red card. Understanding the card system is crucial for players to avoid suspensions and for referees to maintain order on the field, ensuring fair play and sportsmanship."
+                        ),
+                        SelectionModel.Data.SportData.Rules.RulesStudy(
+                            id: 6,
+                            title: "Goal Kick and Corner Kick Rules in Football",
+                            desc: "Goal kicks and corner kicks are essential elements of football, influencing game dynamics. A goal kick is awarded to the defending team when the attacking team kicks the ball out over the goal line. It allows the defending team to restart play from their own goal area. Corner kicks occur when the defending team plays the ball out over their own goal line, giving the attacking team an opportunity to score. Understanding these kick rules is vital for players, coaches, and fans, contributing to strategic gameplay."
+                        ),
+                        SelectionModel.Data.SportData.Rules.RulesStudy(
+                            id: 7,
+                            title: "Throw-In Rule in Football",
+                            desc: "The throw-in is a method of restarting play in football when the ball goes out of bounds over the touchline. The team that did not touch the ball last is awarded the throw-in. The player performing the throw-in must keep both feet on or behind the touchline and use both hands to deliver the ball back into play. Understanding the throw-in rule is essential for players to maintain possession and for referees to ensure fair play, adding an interesting aspect to the game."
+                        ),
+                        SelectionModel.Data.SportData.Rules.RulesStudy(
+                            id: 8,
+                            title: "Offensive and Defensive Strategies in Football",
+                            desc: "Football teams employ various offensive and defensive strategies to gain a competitive edge. Offensive tactics include possession-based play, quick counter-attacks, and strategic positioning to create scoring opportunities. Defensively, teams focus on maintaining shape, pressing opponents, and preventing goal-scoring chances. Coaches develop and adjust these strategies based on the team's strengths and weaknesses. Understanding the intricacies of offensive and defensive tactics is crucial for players, coaches, and fans to appreciate the strategic depth of the game."
+                        ),
+                        SelectionModel.Data.SportData.Rules.RulesStudy(
+                            id: 9,
+                            title: "Extra Time and Penalty Shootouts in Football",
+                            desc: "Extra time and penalty shootouts are mechanisms used to determine a winner in knockout football competitions. If a match ends in a draw, extra time is played, consisting of two 15-minute halves. If no winner emerges, the match proceeds to a penalty shootout, providing each team an equal chance to score from the penalty spot. Understanding the rules for extra time and penalty shootouts is crucial for players, coaches, and fans, as these moments often decide the outcome of important matches."
+                        ),
+                        SelectionModel.Data.SportData.Rules.RulesStudy(
+                            id: 10,
+                            title: "Advantage Rule in Football",
+                            desc: "The advantage rule in football allows referees to let play continue when a team that has been fouled would benefit from maintaining possession. If the fouled team can capitalize on the advantage, the referee refrains from stopping play to award a free kick. Understanding the advantage rule is crucial for players and referees to ensure a fair and flowing game. Players must be aware of the referee's signals, and referees need to assess each situation to apply the advantage rule appropriately."
+                        )
+                    ],
                 test: [
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 1,
-                        question: "What are the values emphasized by Manchester City besides their performance on the field?",
+                        question: "What is the purpose of the offside rule in football?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Integrity and respect for the game"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Winning at any cost"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Encouraging aggression and foul play"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Ignoring rules and regulations")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To slow down the game"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To ensure fair play and maintain the integrity of the game"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To favor attacking teams"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To confuse players")
                         ],
-                        correctAnswer: "Integrity and respect for the game"
+                        correctAnswer: "To ensure fair play and maintain the integrity of the game"
                     ),
-                    
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 1,
-                        question: "Apart from their success in competitions, what does Paris Saint-Germain prioritize?",
+                        question: "When is a player considered offside in football?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Developing young talent and community engagement"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Spending lavishly on transfers"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Avoiding fan engagement"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Focusing solely on individual achievements")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "When they are in their own half"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "When they are level with the second-to-last defender"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "When they are level with the last two defenders"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "When they are nearer to the opponent's goal line than the ball and the second-to-last defender")
                         ],
-                        correctAnswer: "Developing young talent and community engagement"
+                        correctAnswer: "When they are nearer to the opponent's goal line than the ball and the second-to-last defender"
                     ),
-                    
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 1,
-                        question: "What does Real Madrid prioritize alongside their pursuit of trophies?",
+                        question: "What are the exceptions to the offside rule?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Promoting their youth academy and global brand"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Ignoring youth development in favor of expensive signings"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Manipulating match results"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Discouraging fan engagement")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Being level with the last two defenders"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Being level with the second-to-last defender"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Being in their own half"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Being level with the goalkeeper")
                         ],
-                        correctAnswer: "Promoting their youth academy and global brand"
+                        correctAnswer: "Being in their own half"
                     ),
-                    
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 1,
-                        question: "Besides their achievements on the pitch, what does Liverpool prioritize?",
+                        question: "Who benefits from understanding and applying the offside rule?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Fan engagement and community involvement"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Ignoring fan opinions"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Winning awards at any cost"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Discouraging community activities")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Only referees"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Only attacking teams"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Only coaches"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Players, coaches, and fans")
                         ],
-                        correctAnswer: "Fan engagement and community involvement"
+                        correctAnswer: "Players, coaches, and fans"
                     ),
-                    
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 1,
-                        question: "What values does Bayern Munich prioritize besides their performance on the field?",
+                        question: "How does the offside rule impact goal-scoring opportunities?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Promoting youth development and sustainability"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Encouraging unethical behavior"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Disregarding sustainability practices"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Ignoring youth development")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "It has no impact on goal-scoring opportunities"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "It makes scoring easier"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "It makes scoring more challenging"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "It only affects goalkeepers")
                         ],
-                        correctAnswer: "Promoting youth development and sustainability"
+                        correctAnswer: "It makes scoring more challenging"
                     ),
-                    
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 1,
-                        question: "Apart from their results on the pitch, what does Chelsea prioritize?",
+                        question: "Why is the offside rule crucial for the integrity of the game?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Investing in their youth academy and local community"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Disregarding their youth academy"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Encouraging reckless spending"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Ignoring community initiatives")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To favor defensive teams"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To make the game confusing"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To discourage goal-scoring"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To prevent unfair advantages and maintain fairness")
                         ],
-                        correctAnswer: "Investing in their youth academy and local community"
+                        correctAnswer: "To prevent unfair advantages and maintain fairness"
                     ),
-                    
-                    SelectionModel.Data.SportData.Rules.RulesTest(
-                        study_id: 1,
-                        question: "Besides their performance on the field, what values does Manchester United prioritize?",
-                        answers: [
-                            
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Ignoring traditions and community involvement"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Maintaining traditions and supporting local communities"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Promoting unethical behavior"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Discouraging fan engagement")
-                        ],
-                        correctAnswer: "Maintaining traditions and supporting local communities"
-                    ),
-                    
-                    SelectionModel.Data.SportData.Rules.RulesTest(
-                        study_id: 1,
-                        question: "Apart from their achievements in football, what values does Barcelona prioritize?",
-                        answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Promoting youth development and playing attractive football"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Disregarding youth development and playing defensively"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Manipulating match results"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Discouraging fan engagement")
-                        ],
-                        correctAnswer: "Promoting youth development and playing attractive football"
-                    ),
-                    
-                    SelectionModel.Data.SportData.Rules.RulesTest(
-                        study_id: 1,
-                        question: "Besides their success in competitions, what does Juventus prioritize?",
-                        answers: [
-                            
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Disregarding their youth academy"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Investing in their youth academy and sustainability"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Encouraging unethical behavior"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Ignoring sustainability practices")
-                        ],
-                        correctAnswer: "Investing in their youth academy and sustainability"
-                    ),
-                    
-                    SelectionModel.Data.SportData.Rules.RulesTest(
-                        study_id: 1,
-                        question: "What principles guide Borussia Dortmund's operations besides their performance on the field?",
-                        answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Promoting youth development and financial stability"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Ignoring youth development and reckless spending"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Manipulating match results"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Discouraging fan engagement")
-                        ],
-                        correctAnswer: "Promoting youth development and financial stability"
-                    ),
-                    
-                    SelectionModel.Data.SportData.Rules.RulesTest(
-                        study_id: 1,
-                        question: "Besides their success in competitions, what values does Atlético Madrid prioritize?",
-                        answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Hard work and team spirit"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Cheating and dishonesty"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Disregarding teamwork and fair play"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Hard work and team spirit"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Encouraging individualism and selfishness")
-                        ],
-                        correctAnswer: "Hard work and team spirit"
-                    ),
-                    
-                    SelectionModel.Data.SportData.Rules.RulesTest(
-                        study_id: 1,
-                        question: "Apart from their achievements on the pitch, what principles guide Inter Milan's operations?",
-                        answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Promoting youth development and community engagement"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Ignoring youth development and community involvement"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Manipulating match results"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Discouraging fan engagement")
-                        ],
-                        correctAnswer: "Promoting youth development and community engagement"
-                    ),
-                    
-                    SelectionModel.Data.SportData.Rules.RulesTest(
-                        study_id: 1,
-                        question: "What values does Arsenal prioritize apart from their results in football?",
-                        answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Youth development and community involvement"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Ignoring youth development and community engagement"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Manipulating match results"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Discouraging fan engagement")
-                        ],
-                        correctAnswer: "Youth development and community involvement"
-                    ),
-                    
-                    SelectionModel.Data.SportData.Rules.RulesTest(
-                        study_id: 1,
-                        question: "Besides their performance on the field, what values does Tottenham Hotspur prioritize?",
-                        answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Integrity and inclusivity"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Cheating and exclusivity"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Disregarding integrity and promoting exclusivity"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Encouraging unethical behavior")
-                        ],
-                        correctAnswer: "Integrity and inclusivity"
-                    ),
-                    
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 2,
-                        question: "What are the core values emphasized by Paris Saint-Germain?",
+                        question: "What is the purpose of fouls and free kicks in football?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Arrogance"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Discipline"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Laziness"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Dishonesty")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To slow down the game"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To discourage sportsmanship"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To ensure a fair and safe playing environment"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To favor one team over another")
                         ],
-                        correctAnswer: "Discipline"
+                        correctAnswer: "To ensure a fair and safe playing environment"
                     ),
-                    
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 2,
-                        question: "Which aspect is crucial for PSG players to uphold during matches?",
+                        question: "How can a player commit a foul in football?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Cheating"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Fair play"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Aggression"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Diving")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "By scoring a goal"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "By engaging in unfair or reckless play"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "By running too fast"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "By celebrating excessively")
                         ],
-                        correctAnswer: "Fair play"
+                        correctAnswer: "By engaging in unfair or reckless play"
                     ),
-                    
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 2,
-                        question: "What behavior is expected of PSG players towards their opponents?",
+                        question: "What happens when a foul occurs in football?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Insulting"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Aggressive"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Respectful"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Disrespectful")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "The fouling team is awarded a goal"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "The fouled player is sent off the field"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "The opposing team is awarded a free kick"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "The game continues without any consequences")
                         ],
-                        correctAnswer: "Respectful"
+                        correctAnswer: "The opposing team is awarded a free kick"
                     ),
-                    
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 2,
-                        question: "What is a key requirement for PSG players regarding training?",
+                        question: "What governs player conduct in football?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Skipping sessions"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Arriving late"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Adhering to schedules"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Ignoring instructions")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Personal preferences"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "The coach's instructions"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "The weather conditions"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Rules related to fouls and free kicks")
                         ],
-                        correctAnswer: "Adhering to schedules"
+                        correctAnswer: "Rules related to fouls and free kicks"
                     ),
-                    
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 2,
-                        question: "What is the importance of teamwork at PSG?",
+                        question: "Why is understanding fouls and free kicks essential for players?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Irrelevant"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Unnecessary"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Valued"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Disliked")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To discourage fair play"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To navigate the game effectively"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To provoke opponents"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To confuse the referees")
                         ],
-                        correctAnswer: "Valued"
+                        correctAnswer: "To navigate the game effectively"
                     ),
-                    
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 2,
-                        question: "What attitude should PSG players demonstrate towards the club and its supporters?",
+                        question: "What does the rule about fouls and free kicks promote in football?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Disloyalty"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Indifference"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Loyalty"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Hostility")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Encouraging unsportsmanlike conduct"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Strategic gameplay and sportsmanship"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Discouraging any physical contact"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Favoring one team over another")
                         ],
-                        correctAnswer: "Loyalty"
-                    ),
-                    
-                    SelectionModel.Data.SportData.Rules.RulesTest(
-                        study_id: 3,
-                        question: "What are some key rules guiding Real Madrid?",
-                        answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Respect for Tradition"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Commitment to Excellence"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Sportsmanship"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Unity and Teamwork")
-                        ],
-                        correctAnswer: "Respect for Tradition"
+                        correctAnswer: "Strategic gameplay and sportsmanship"
                     ),
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 3,
-                        question: "What principle does Real Madrid prioritize in its approach to opponents?",
+                        question: "When does a handball violation occur in football?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Deception"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Sportsmanship"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Ruthlessness"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Arrogance")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "When a player intentionally handles the ball with their hand or arm"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "When a player accidentally touches the ball"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "When a player kicks the ball out of play"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "When a player scores a goal")
                         ],
-                        correctAnswer: "Sportsmanship"
+                        correctAnswer: "When a player intentionally handles the ball with their hand or arm"
                     ),
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 3,
-                        question: "What quality fosters a sense of togetherness within Real Madrid?",
+                        question: "What situations does the handball rule in football define?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Individualism"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Unity"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Indifference"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Discord")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Situations involving offside"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Various situations involving fouls"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Situations involving gaining an unfair advantage or scoring a goal with the hand"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Situations involving player substitutions")
                         ],
-                        correctAnswer: "Unity"
+                        correctAnswer: "Situations involving gaining an unfair advantage or scoring a goal with the hand"
                     ),
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 3,
-                        question: "How does Real Madrid engage with its community?",
+                        question: "How do referees make decisions in contentious handball situations?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "By ignoring them"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Through isolation"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "By actively participating"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "By criticizing them")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Randomly"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Based on players' opinions"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Without any assistance"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Using video assistance")
                         ],
-                        correctAnswer: "By actively participating"
+                        correctAnswer: "Using video assistance"
                     ),
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 3,
-                        question: "What does Real Madrid aim to achieve with its global outreach?",
+                        question: "Why is understanding the handball rule essential for players, officials, and fans?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Insularity"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Representation"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Apathy"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Neglect")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To encourage intentional handballs"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To confuse match outcomes"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To discourage fair play"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To influence match outcomes and contribute to the overall fairness of the game")
                         ],
-                        correctAnswer: "Representation"
+                        correctAnswer: "To influence match outcomes and contribute to the overall fairness of the game"
                     ),
-                    
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 3,
+                        question: "What role does the handball rule play in football?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Encouraging unfair advantages"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Creating confusion"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Influencing match outcomes and contributing to overall fairness"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Promoting intentional handballs")
+                        ],
+                        correctAnswer: "Influencing match outcomes and contributing to overall fairness"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 3,
+                        question: "What assistance do referees use to make accurate decisions in handball situations?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Telepathy"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Magic spells"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Video assistance"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Coin toss")
+                        ],
+                        correctAnswer: "Video assistance"
+                    ),
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 4,
-                        question: "What are the rules governing conduct at Liverpool Football Club?",
+                        question: "When is a penalty kick awarded in football?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Respect for the game"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Unity among players, staff, and supporters"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Discipline for breaches of club rules"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Freedom to disrespect opponents")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "When a defensive player commits a foul outside the penalty area"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "When a defensive player commits a foul inside their penalty area"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "When an offensive player commits a foul inside the penalty area"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Randomly")
                         ],
-                        correctAnswer: "Respect for the game"
+                        correctAnswer: "When a defensive player commits a foul inside their penalty area"
                     ),
-                    
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 4,
-                        question: "When was Liverpool Football Club founded?",
+                        question: "From where is a penalty kick taken in football?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "1875"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "1892"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "1905"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "1920")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "From the center circle"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "From the goal line"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "From the corner flag"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "From the penalty spot, 12 yards away from the goal")
                         ],
-                        correctAnswer: "1892"
+                        correctAnswer: "From the penalty spot, 12 yards away from the goal"
                     ),
-                    
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 4,
-                        question: "Which of the following is NOT a rule at Liverpool FC?",
+                        question: "What type of shot does a team get from a penalty kick in football?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Respect for opponents"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Sportsmanship"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Aggression towards referees"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Loyalty")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Indirect free shot"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Curling shot"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Volley shot"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Direct free shot")
                         ],
-                        correctAnswer: "Aggression towards referees"
+                        correctAnswer: "Direct free shot"
                     ),
-                    
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 4,
-                        question: "What is the importance of unity at Liverpool FC?",
+                        question: "How far is the penalty spot from the goal in football?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "It's optional"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "It's crucial"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "It's irrelevant"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "It's discouraged")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "6 yards"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "10 yards"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "15 yards"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "12 yards")
                         ],
-                        correctAnswer: "It's crucial"
+                        correctAnswer: "12 yards"
                     ),
-                    
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 4,
-                        question: "What happens if a member breaches club rules?",
+                        question: "What is the significance of a penalty kick in football?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Nothing"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "They are praised"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "They face disciplinary action"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "They are rewarded")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "No significance"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "A ceremonial moment"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "A moment to showcase skills"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "A crucial moment that can change the course of a match")
                         ],
-                        correctAnswer: "They face disciplinary action"
+                        correctAnswer: "A crucial moment that can change the course of a match"
                     ),
-                    
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 4,
-                        question: "What is the primary principle regarding conduct on and off the field?",
+                        question: "Who participates in a penalty kick in football?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Aggression"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Loyalty"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Sportsmanship"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Deception")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "The entire team"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "The goalkeeper only"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "A one-on-one duel between the kicker and the goalkeeper"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "No one")
                         ],
-                        correctAnswer: "Sportsmanship"
+                        correctAnswer: "A one-on-one duel between the kicker and the goalkeeper"
                     ),
-                    
-                    SelectionModel.Data.SportData.Rules.RulesTest(
-                        study_id: 4,
-                        question: "How should players and staff represent the club?",
-                        answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "With dishonesty"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "With arrogance"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "With dignity and respect"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "With hostility")
-                        ],
-                        correctAnswer: "With dignity and respect"
-                    ),
-                    
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 5,
-                        question: "What are the rules governing Bayern Munich's operations?",
+                        question: "What does a yellow card signify in football?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "UEFA Champions League rules"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Financial Fair Play regulations"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "FIFA World Cup guidelines"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "National league regulations")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "A serious offense"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "A minor offense"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "No offense at all"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "A goal scored")
                         ],
-                        correctAnswer: "Financial Fair Play regulations"
+                        correctAnswer: "A minor offense"
                     ),
-                    
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 5,
-                        question: "What does ethical conduct entail for Bayern Munich?",
+                        question: "What happens when a player receives a red card in football?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Excessive spending on player transfers"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Fair treatment of players and stakeholders"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Ignoring FIFA regulations"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Avoiding community engagement")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "They continue playing"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "They receive a warning"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "They are ejected from the game"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "They get a penalty kick")
                         ],
-                        correctAnswer: "Fair treatment of players and stakeholders"
+                        correctAnswer: "They are ejected from the game"
                     ),
-                    
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 5,
-                        question: "What governing bodies' guidelines do Bayern Munich follow?",
+                        question: "What can accumulating yellow cards lead to in football?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Only FIFA regulations"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Only UEFA regulations"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Both FIFA and UEFA regulations"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "None of the above")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "A trophy"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "A suspension"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "A substitution"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "A penalty kick")
                         ],
-                        correctAnswer: "Both FIFA and UEFA regulations"
+                        correctAnswer: "A suspension"
                     ),
-                    
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 5,
-                        question: "In addition to football, what does Bayern Munich emphasize?",
+                        question: "Why is understanding the yellow and red card system crucial for football players?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Financial speculation"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Environmental sustainability and community engagement"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Political activism"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Cultural events")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To accumulate more cards"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To intimidate opponents"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To avoid suspensions"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To receive more cards")
                         ],
-                        correctAnswer: "Environmental sustainability and community engagement"
+                        correctAnswer: "To avoid suspensions"
                     ),
-                    
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 5,
-                        question: "Which of the following contributes to Bayern Munich's positive reputation?",
+                        question: "What does a red card signify in football?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Excessive spending beyond means"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Lack of adherence to regulations"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Environmental sustainability efforts"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Disrespect towards stakeholders")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "A minor offense"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "A warning"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "A serious offense, resulting in the player's ejection"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "A substitution")
                         ],
-                        correctAnswer: "Environmental sustainability efforts"
+                        correctAnswer: "A serious offense, resulting in the player's ejection"
                     ),
-                    
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 5,
-                        question: "What is essential for Bayern Munich's success on and off the pitch?",
+                        question: "What is the purpose of the yellow and red card system in football?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Violating financial regulations"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Following ethical conduct"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Ignoring community engagement"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Disregarding player development")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To award points"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To promote violence"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To control player behavior and maintain order"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To determine the winner")
                         ],
-                        correctAnswer: "Following ethical conduct"
+                        correctAnswer: "To control player behavior and maintain order"
                     ),
-                    
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 6,
-                        question: "What values does Chelsea prioritize in its operations?",
+                        question: "When is a goal kick awarded in football?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Arrogance and hostility"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Inclusivity, respect, and community engagement"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Isolation and exclusivity"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Indifference and apathy")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "When a player scores a goal"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "When the attacking team kicks the ball out over the goal line"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "When the ball goes out over the sideline"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "When a player commits a foul")
                         ],
-                        correctAnswer: "Inclusivity, respect, and community engagement"
+                        correctAnswer: "When the attacking team kicks the ball out over the goal line"
                     ),
-                    
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 6,
-                        question: "What aspect of player development does Chelsea emphasize through its academy system?",
+                        question: "What does a goal kick allow the defending team to do?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Ignoring young talent"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Promoting inclusivity"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Developing young talent"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Disregarding community engagement")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Score a goal"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Substitute players"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Restart play from their own goal area"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Take a penalty kick")
                         ],
-                        correctAnswer: "Developing young talent"
+                        correctAnswer: "Restart play from their own goal area"
                     ),
-                    
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 6,
-                        question: "Why are rules and regulations important for Chelsea Football Club?",
+                        question: "When do corner kicks occur in football?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To promote chaos and disorder"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To ensure fair play, integrity, and professionalism"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To encourage unethical behavior"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To create confusion and uncertainty")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "When the ball goes out over the sideline"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "When a player scores a goal"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "When the attacking team kicks the ball out over the goal line"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "When the defending team plays the ball out over their own goal line")
                         ],
-                        correctAnswer: "To ensure fair play, integrity, and professionalism"
+                        correctAnswer: "When the defending team plays the ball out over their own goal line"
                     ),
-                    
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 6,
-                        question: "What principles guide Chelsea's operations besides their performance on the pitch?",
+                        question: "What opportunity does a corner kick provide to the attacking team?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Promoting inclusivity and respect"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Encouraging arrogance and hostility"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Ignoring ethical standards"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Disregarding community engagement")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To take a penalty kick"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To restart play from their own goal area"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To score a goal"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To make a substitution")
                         ],
-                        correctAnswer: "Promoting inclusivity and respect"
+                        correctAnswer: "To score a goal"
                     ),
-                    
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 6,
-                        question: "How does Chelsea aim to create a positive environment for everyone involved with the club?",
+                        question: "Where is a goal kick taken in football?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "By fostering conflict and division"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "By promoting inclusivity, respect, and support"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "By discouraging cooperation and teamwork"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "By ignoring the needs of its supporters")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "From the center of the field"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "From the sideline"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "From the attacking team's goal area"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "From the penalty spot")
                         ],
-                        correctAnswer: "By promoting inclusivity, respect, and support"
+                        correctAnswer: "From the attacking team's goal area"
                     ),
-                    
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 6,
-                        question: "What is the ultimate goal of Chelsea's rules and regulations?",
+                        question: "What happens if the attacking team kicks the ball out over the goal line?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To create chaos and confusion"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To ensure fair play, integrity, and professionalism"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To promote dishonesty and deception"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To alienate fans and supporters")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "A penalty kick is awarded"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "A goal kick is awarded to the attacking team"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "A corner kick is awarded to the attacking team"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "A free kick is awarded to the defending team")
                         ],
-                        correctAnswer: "To ensure fair play, integrity, and professionalism"
+                        correctAnswer: "A goal kick is awarded to the attacking team"
                     ),
-                    
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 7,
-                        question: "What values does Manchester United emphasize?",
+                        question: "When is a throw-in awarded in football?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Fair play and respect"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Aggression and arrogance"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Deception and dishonesty"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Cheating and foul play")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "When a player scores a goal"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "When the ball goes out of bounds over the goal line"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "When the ball goes out of bounds over the touchline"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "When a player commits a foul")
                         ],
-                        correctAnswer: "Fair play and respect"
+                        correctAnswer: "When the ball goes out of bounds over the touchline"
                     ),
-                    
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 7,
-                        question: "When was Manchester United founded?",
+                        question: "Which team is awarded a throw-in?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "1878"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "1905"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "1920"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "1945")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "The team that touched the ball last"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "The attacking team"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "The defending team"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "The team in possession of the ball")
                         ],
-                        correctAnswer: "1878"
+                        correctAnswer: "The team that touched the ball last"
                     ),
-                    
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 7,
-                        question: "What behavior does the club penalize?",
+                        question: "What must the player performing a throw-in do?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Violent conduct"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Showing respect"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Fair play"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Community engagement")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Dribble the ball"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Use only one hand to throw the ball"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Keep one foot on the field"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Keep both feet on or behind the touchline")
                         ],
-                        correctAnswer: "Violent conduct"
+                        correctAnswer: "Keep both feet on or behind the touchline"
                     ),
-                    
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 7,
-                        question: "What is the club's stance on professionalism?",
+                        question: "What action restarts play after a throw-in?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "It's not important"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "It's optional"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "It's essential"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "It's irrelevant")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "A free kick"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "A corner kick"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "A goal kick"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Throwing the ball back into play")
                         ],
-                        correctAnswer: "It's essential"
+                        correctAnswer: "Throwing the ball back into play"
                     ),
-                    
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 7,
-                        question: "What is one aspect of Manchester United's disciplinary measures?",
+                        question: "What part of the field does a throw-in take place?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Encouraging unsporting behavior"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Ignoring violations"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Penalties for misconduct"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Rewarding dissent")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "In the penalty area"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "On the sideline"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "In the center circle"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "In the goal area")
                         ],
-                        correctAnswer: "Penalties for misconduct"
+                        correctAnswer: "On the sideline"
                     ),
-                    
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 7,
-                        question: "What is one of Manchester United's aims through its principles?",
+                        question: "What happens if a player fails to keep both feet on or behind the touchline during a throw-in?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To discourage inclusivity"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To lower fan engagement"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To uphold its reputation"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To promote dishonesty")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "A penalty kick is awarded"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "The opposing team gets a throw-in"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "The player is cautioned with a yellow card"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "The throw-in is retaken by the same player")
                         ],
-                        correctAnswer: "To uphold its reputation"
+                        correctAnswer: "The throw-in is retaken by the same player"
                     ),
-                    
-                    
-                    
-                    
-                    
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 8,
-                        question: "What were some rules enforced in 17th century Barcelona?",
+                        question: "What are some offensive tactics in football?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Strict curfew to maintain safety and order"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Regulations on dress code to preserve decorum"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Trade restrictions to protect local businesses"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Mandatory attendance at religious services")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Avoiding possession"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Slowing down the game"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Quick counter-attacks"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Staying static on the field")
                         ],
-                        correctAnswer: "Strict curfew to maintain safety and order"
+                        correctAnswer: "Quick counter-attacks"
                     ),
-                    
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 8,
-                        question: "Why did Barcelona have regulations on dress code?",
+                        question: "What is a defensive strategy in football?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To encourage fashion experimentation"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To maintain social status distinctions"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To promote uniformity among citizens"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To reduce clothing expenses")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Allowing opponents to score easily"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Avoiding pressing opponents"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Maintaining shape and pressing opponents"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Always focusing on attacking")
                         ],
-                        correctAnswer: "To maintain social status distinctions"
+                        correctAnswer: "Maintaining shape and pressing opponents"
                     ),
-                    
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 8,
-                        question: "What was the purpose of trade restrictions in Barcelona?",
+                        question: "How do coaches develop strategies in football?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To promote international trade relations"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To protect local businesses"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To encourage free market competition"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To restrict access to foreign goods")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "By ignoring the team's strengths and weaknesses"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "By not adjusting strategies"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "By maintaining the same tactics every game"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Based on the team's strengths and weaknesses")
                         ],
-                        correctAnswer: "To protect local businesses"
+                        correctAnswer: "Based on the team's strengths and weaknesses"
                     ),
-                    
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 8,
-                        question: "Which religion heavily influenced Barcelona society during the 17th century?",
+                        question: "Why is understanding offensive and defensive tactics crucial?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Islam"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Buddhism"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Judaism"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Catholicism")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "It has no impact on the game"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To appreciate the strategic depth of the game"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To slow down the pace of the game"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To focus solely on individual skills")
                         ],
-                        correctAnswer: "Catholicism"
+                        correctAnswer: "To appreciate the strategic depth of the game"
                     ),
-                    
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 8,
-                        question: "What behavior was expected from citizens in public spaces?",
+                        question: "What role do offensive tactics play in creating scoring opportunities?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Disrespect towards authorities"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Vandalism of public property"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Respectful conduct towards others"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Promotion of disorderly conduct")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "They don't contribute to scoring opportunities"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "They slow down the game"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "They focus on preventing goals"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "They strategically position to create chances")
                         ],
-                        correctAnswer: "Respectful conduct towards others"
+                        correctAnswer: "They strategically position to create chances"
                     ),
-                    
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 8,
-                        question: "What civic duty were citizens obligated to perform?",
+                        question: "What is the defensive focus in preventing goal-scoring chances?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Participation in community projects"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Ignoring public spaces"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Avoiding involvement in defense efforts"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Disregarding authority's orders")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Allowing opponents to score freely"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Avoiding maintaining shape"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Avoiding pressing opponents"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Maintaining shape and pressing opponents")
                         ],
-                        correctAnswer: "Participation in community projects"
+                        correctAnswer: "Maintaining shape and pressing opponents"
                     ),
-                    
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 9,
-                        question: "What is a fundamental value at Juventus?",
+                        question: "When is extra time played in football?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Innovation"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Tradition"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Individualism"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Isolation")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "At the beginning of every match"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "In every knockout competition"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "After a match ends in a draw"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Never")
                         ],
-                        correctAnswer: "Tradition"
+                        correctAnswer: "After a match ends in a draw"
                     ),
-                    
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 9,
-                        question: "What quality is essential for Juventus players?",
+                        question: "How long does each half of extra time last?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Mediocrity"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Consistency"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Indifference"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Apathy")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "10 minutes"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "15 minutes"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "20 minutes"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "30 minutes")
                         ],
-                        correctAnswer: "Consistency"
+                        correctAnswer: "15 minutes"
                     ),
-                    
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 9,
-                        question: "What is encouraged among Juventus players?",
+                        question: "What happens if a winner is not determined in extra time?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Selfishness"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Team spirit"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Arrogance"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Hostility")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "The match is abandoned"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Both teams lose"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "The match proceeds to a penalty shootout"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "The teams share the victory")
                         ],
-                        correctAnswer: "Team spirit"
+                        correctAnswer: "The match proceeds to a penalty shootout"
                     ),
-                    
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 9,
-                        question: "What behavior is expected from Juventus members?",
+                        question: "How is a winner determined in a penalty shootout?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Irresponsibility"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Indiscipline"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Professionalism"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Insubordination")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Based on the number of fouls committed"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Through a coin toss"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "By the team with the most possession"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "The team with the most successful penalty kicks")
                         ],
-                        correctAnswer: "Professionalism"
+                        correctAnswer: "The team with the most successful penalty kicks"
                     ),
-                    
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 9,
-                        question: "What aspect of the game do Juventus players need to understand?",
+                        question: "Why are extra time and penalty shootouts crucial in football?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Luck"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Tactics"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Coincidence"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Superstition")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "They never impact the match outcome"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "They determine the winner in knockout competitions"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "They prolong the match unnecessarily"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "They are rarely used in football")
                         ],
-                        correctAnswer: "Tactics"
+                        correctAnswer: "They determine the winner in knockout competitions"
                     ),
-                    
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 9,
-                        question: "Who do Juventus players show respect towards?",
+                        question: "How do penalty shootouts contribute to deciding the outcome of a match?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Opponents only"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Themselves"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Fans"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Referees")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "They are irrelevant in determining the winner"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "By testing players' endurance"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Through determining the team with the most possession"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "The team with the most successful penalty kicks wins")
                         ],
-                        correctAnswer: "Fans"
+                        correctAnswer: "The team with the most successful penalty kicks wins"
                     ),
-                    
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 10,
-                        question: "Where is Borussia Dortmund based?",
+                        question: "What is the advantage rule in football?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Berlin"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Dortmund"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Munich"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Hamburg")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Always stop play for every foul"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Referees never apply the advantage rule"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Referees let play continue when a fouled team would benefit"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Teams can request the application of the advantage rule")
                         ],
-                        correctAnswer: "Dortmund"
+                        correctAnswer: "Referees let play continue when a fouled team would benefit"
                     ),
-                    
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 10,
-                        question: "What principle does Borussia Dortmund emphasize in its youth development?",
+                        question: "When does the advantage rule come into play?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Winning at all costs"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Respect and fair play"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Individual accolades"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Defensive tactics")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Only in the last 10 minutes of a match"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "During injury time"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "At the referee's discretion during any phase of the game"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Only during penalty situations")
                         ],
-                        correctAnswer: "Respect and fair play"
+                        correctAnswer: "At the referee's discretion during any phase of the game"
                     ),
-                    
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 10,
-                        question: "What style of football is Borussia Dortmund known for?",
+                        question: "Why is understanding the advantage rule crucial for players?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Possession-based"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Counter-attacking"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Defensive"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Conservative")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To argue with referees"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To avoid playing under any circumstances"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To intentionally foul opponents"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To capitalize on opportunities and maintain possession")
                         ],
-                        correctAnswer: "Counter-attacking"
+                        correctAnswer: "To capitalize on opportunities and maintain possession"
                     ),
-                    
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 10,
-                        question: "What are the colors of Borussia Dortmund?",
+                        question: "How do referees signal the application of the advantage rule?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Blue and white"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Yellow and black"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Red and white"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Green and black")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "By stopping play immediately"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "By showing a yellow card to the fouling player"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Through a hand gesture or verbal communication"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "By awarding a penalty kick to the fouled team")
                         ],
-                        correctAnswer: "Yellow and black"
+                        correctAnswer: "Through a hand gesture or verbal communication"
                     ),
-                    
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 10,
-                        question: "What is the name of Borussia Dortmund's home stadium?",
+                        question: "What happens if the fouled team cannot capitalize on the advantage?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Allianz Arena"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Mercedes-Benz Arena"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Signal Iduna Park"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Volksparkstadion")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "The match is replayed"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "The fouling team receives a reward"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "The advantage is lost, and play is stopped for a free kick"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Referees award a penalty kick to the fouled team")
                         ],
-                        correctAnswer: "Signal Iduna Park"
+                        correctAnswer: "The advantage is lost, and play is stopped for a free kick"
                     ),
-                    
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 10,
-                        question: "Besides football, what else is Borussia Dortmund committed to?",
+                        question: "Can players request the application of the advantage rule?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Political activism"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Environmental sustainability"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Stock market investments"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Cultural events")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Yes, only captains can request"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "No, players cannot influence the application"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Yes, through a majority team vote"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "No, players can only request penalty kicks")
                         ],
-                        correctAnswer: "Environmental sustainability"
+                        correctAnswer: "No, players cannot influence the application"
                     )
+                    
+                    
+                    
+                    
+                    
+                    
                 ]
             )
         ),
@@ -4648,29 +4034,29 @@ extension SelectionModel {
                         correctAnswer: "17"
                     ),
                 ]
-                
-                
+
+
             ),
             rules: SelectionModel.Data.SportData.Rules(
                 study: [
                     SelectionModel.Data.SportData.Rules.RulesStudy(
                         id: 1,
-                        title: "Rules",
+                        title: "Shot Clock in Basketball: 24 Seconds of Pace and Precision",
                         desc: "In basketball, the shot clock is a vital component that adds pace and excitement to the game. The shot clock is a countdown timer, typically set to 24 seconds in professional basketball. It starts when a team gains possession of the ball. The team must attempt a field goal that hits the rim before the shot clock expires. If they fail to do so, it results in a shot clock violation, and the opposing team gains possession. The shot clock prevents teams from stalling and encourages fast-paced, dynamic gameplay. Understanding and managing the shot clock is crucial for teams to execute effective offensive strategies and avoid turnovers."
                     ),
                     SelectionModel.Data.SportData.Rules.RulesStudy(
                         id: 2,
-                        title: "Rules",
+                        title: "Basketball's Jump Ball: Athleticism, Strategy, and Game-Defining Moments",
                         desc: "In basketball, the jump ball serves as the initial and recurring method to begin play or resolve possession disputes. This crucial aspect of the game occurs at the center circle, involving two opposing players leaping to gain control of the ball after a referee's toss. The jump ball establishes a fair start to each game, emphasizing athleticism and timing. Upon the referee's signal, players strategically position themselves, aiming to outmaneuver their opponent and secure possession for their team. Height, agility, and anticipation play pivotal roles in determining the victor of the jump ball. The team gaining possession gains a valuable offensive opportunity. Understanding the nuances of the jump ball is essential for players and spectators alike. It not only initiates the game but also occurs during jump-ball situations throughout the match, adding a dynamic element to the contest. The jump ball's significance lies in its ability to influence the flow of the game and set the tone for competitive play."
                     ),
                     SelectionModel.Data.SportData.Rules.RulesStudy(
                         id: 3,
-                        title: "Rules",
+                        title: "Crucial Role of Possession Arrow in Basketball: Fair Play and Strategic Management",
                         desc: "In basketball, the possession arrow is a vital rule that dictates which team is awarded possession of the ball during jump-ball situations. Unlike the jump ball, the possession arrow is a system used to alternate possessions between teams. When a jump-ball scenario arises, the team not awarded possession through the jump ball gains the next possession based on the possession arrow's direction. This rule promotes fairness by ensuring both teams have an equal opportunity to possess the ball throughout the game. The possession arrow is particularly relevant in situations such as held balls and alternating possessions after jump balls. Players, coaches, and referees must be keenly aware of the possession arrow's status to navigate game scenarios effectively. This rule adds an intriguing layer to basketball strategy, as teams strategically vie for possession through various in-game situations governed by the possession arrow. Understanding and utilizing this rule contribute to a team's overall game management."
                     ),
                     SelectionModel.Data.SportData.Rules.RulesStudy(
                         id: 4,
-                        title: "Rules",
+                        title: "Decoding the Three-Second Violation in Basketball: Balancing Offensive Strategy and Fair Play in the Key Area",
                         desc: """
                         In basketball, the three-second violation is a crucial rule designed to regulate players' time spent in the key area, also known as the paint or the keyhole. The key area extends from the baseline to the free-throw line, with its width defined by the width of the free-throw lane. The violation occurs when an offensive player remains in the key for more than three seconds continuously.
             The primary purpose of this rule is to prevent offensive players from camping in the key, creating an unfair advantage. To avoid a violation, offensive players must either shoot the ball or exit the key within the three-second timeframe. The three-second violation results in a turnover, awarding the opposing team possession of the ball. Understanding and adhering to the three-second rule is essential for offensive players to maintain fair and dynamic gameplay. This rule adds an element of strategy and quick decision-making to offensive plays near the basket.
@@ -4678,8 +4064,33 @@ extension SelectionModel {
                     ),
                     SelectionModel.Data.SportData.Rules.RulesStudy(
                         id: 5,
-                        title: "Rules",
+                        title: "Mastering Backcourt Violation: Key to Strategic Basketball Play",
                         desc: "In basketball, the backcourt violation is a fundamental rule governing the movement of the ball across the court. This violation occurs when an offensive team fails to bring the ball from the backcourt to the frontcourt within the allotted time. Once a team establishes possession in the frontcourt, they must avoid passing or dribbling the ball back into the backcourt. The backcourt violation emphasizes strategic ball movement, ensuring fair play and dynamic gameplay. Teams must employ effective passing and coordination to navigate the court while adhering to the rule. A violation results in the loss of possession, with the opposing team gaining the ball. Understanding the backcourt violation is crucial for both offensive and defensive strategies. Offensive players aim to maintain possession, while defensive players strategically press to force violations. This rule adds an intriguing layer to the game, requiring teams to balance aggression with precision in their court movements."
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesStudy(
+                        id: 6,
+                        title: "24-Second Shot Clock in Basketball",
+                        desc: "The 24-second shot clock is a fundamental rule in basketball, designed to add pace and excitement to the game. It begins when a team gains possession, and they must attempt a field goal that hits the rim before the shot clock expires. A shot clock violation results in the opposing team gaining possession. This rule prevents stalling and promotes fast-paced, dynamic gameplay. Teams strategically manage the shot clock to execute effective offensive strategies and avoid turnovers."
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesStudy(
+                        id: 7,
+                        title: "Jump Ball Rule in Basketball",
+                        desc: "The jump ball serves as the initial and recurring method to start play or resolve possession disputes in basketball. Taking place at the center circle, two opposing players leap to gain control after a referee's toss. The jump ball establishes a fair start, emphasizing athleticism and timing. Understanding the nuances of the jump ball is crucial for players and spectators, influencing the flow of the game and setting the tone for competitive play."
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesStudy(
+                        id: 8,
+                        title: "Possession Arrow Rule in Basketball",
+                        desc: "The possession arrow is a vital rule in basketball, dictating which team is awarded possession during jump-ball situations. Unlike the jump ball, the possession arrow alternates possessions between teams. Teams not awarded possession through the jump ball gain the next possession based on the possession arrow's direction. This rule ensures fairness, with both teams having an equal opportunity to possess the ball throughout the game. Understanding and utilizing the possession arrow contribute to effective game management."
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesStudy(
+                        id: 9,
+                        title: "Three-Second Violation in Basketball",
+                        desc: "The three-second violation is a crucial rule in basketball, regulating players' time in the key area. Offensive players are not allowed to remain in the key for more than three seconds continuously. This rule prevents camping in the key, ensuring fair and dynamic gameplay. Violation results in a turnover, awarding the opposing team possession. Offensive players must adhere to this rule, adding strategy and quick decision-making to plays near the basket."
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesStudy(
+                        id: 10,
+                        title: "Backcourt Violation in Basketball",
+                        desc: "The backcourt violation is a fundamental rule in basketball governing ball movement across the court. Offensive teams must bring the ball from the backcourt to the frontcourt within the allotted time. Once possession is established in the frontcourt, passing or dribbling the ball back into the backcourt is prohibited. This rule emphasizes strategic ball movement, with violations resulting in the loss of possession. Teams balance aggression with precision to navigate the court effectively."
                     ),
                 ],
                 test: [
@@ -5004,11 +4415,353 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Adds an intriguing layer to the game"
                     ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 5,
+                        question: "What emphasizes strategic ball movement in basketball?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Scoring quickly"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Dribbling the ball continuously"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Avoiding ball movement"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Backcourt violation")
+                        ],
+                        correctAnswer: "Backcourt violation"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 6,
+                        question: "What is the purpose of the 24-second shot clock in basketball?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To measure game duration"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To determine team possession"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To add pace and excitement"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To regulate player substitutions")
+                        ],
+                        correctAnswer: "To add pace and excitement"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 6,
+                        question: "When does the 24-second shot clock start in basketball?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "At the beginning of the game"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "After halftime"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "When a team gains possession"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "After scoring a basket")
+                        ],
+                        correctAnswer: "When a team gains possession"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 6,
+                        question: "What happens if a team fails to attempt a field goal before the 24-second shot clock expires?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "They receive a warning"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "No consequences"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "The opposing team gains possession"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "They get extra time on the shot clock")
+                        ],
+                        correctAnswer: "The opposing team gains possession"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 6,
+                        question: "How does the 24-second shot clock impact gameplay in basketball?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "It encourages stalling"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "It regulates player substitutions"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "It adds pace and excitement"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "It determines game duration")
+                        ],
+                        correctAnswer: "It adds pace and excitement"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 6,
+                        question: "Why do teams strategically manage the shot clock in basketball?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To minimize player rotations"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To encourage stalling"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To execute effective offensive strategies"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To determine team possession")
+                        ],
+                        correctAnswer: "To execute effective offensive strategies"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 6,
+                        question: "What is the consequence of a shot clock violation in basketball?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Extra time is added"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "The game ends"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "The opposing team gains possession"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "A warning is issued")
+                        ],
+                        correctAnswer: "The opposing team gains possession"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 7,
+                        question: "What is the purpose of the jump ball in basketball?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To determine game duration"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To add pace and excitement"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To establish a fair start and resolve possession disputes"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To regulate player substitutions")
+                        ],
+                        correctAnswer: "To establish a fair start and resolve possession disputes"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 7,
+                        question: "Where does the jump ball take place in basketball?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "At the sideline"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "At the three-point line"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "At the center circle"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "At the free-throw line")
+                        ],
+                        correctAnswer: "At the center circle"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 7,
+                        question: "How is possession determined during a jump ball in basketball?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "By the height of the players involved"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "By a coin toss"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "By the team with the loudest fans"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "By the team that wins the jump ball")
+                        ],
+                        correctAnswer: "By the team that wins the jump ball"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 7,
+                        question: "What does the jump ball emphasize in basketball?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Aesthetic plays"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Aggressive defense"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Athleticism and timing"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Team huddles")
+                        ],
+                        correctAnswer: "Athleticism and timing"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 7,
+                        question: "How does the understanding of the jump ball influence the game in basketball?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "It has no impact on the game"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "It determines the final score"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "It influences the flow of the game and sets the tone for competitive play"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "It regulates player substitutions")
+                        ],
+                        correctAnswer: "It influences the flow of the game and sets the tone for competitive play"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 7,
+                        question: "What happens after the referee's toss in a jump ball situation?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "The game ends"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Players perform a dance routine"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Players leap to gain control"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Players take a break")
+                        ],
+                        correctAnswer: "Players leap to gain control"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 8,
+                        question: "What is the purpose of the possession arrow in basketball?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To add pace and excitement"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To establish a fair start and resolve possession disputes"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To regulate player substitutions"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To dictate which team is awarded possession during jump-ball situations")
+                        ],
+                        correctAnswer: "To dictate which team is awarded possession during jump-ball situations"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 8,
+                        question: "How does the possession arrow differ from the jump ball in basketball?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "It has no impact on possession"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "It determines the final score"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "It alternates possessions between teams"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "It eliminates jump balls")
+                        ],
+                        correctAnswer: "It alternates possessions between teams"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 8,
+                        question: "What happens when a team is not awarded possession through the jump ball in basketball?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "They lose a point"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "They automatically gain possession"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "They gain the next possession based on the possession arrow's direction"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "They must perform a forfeit")
+                        ],
+                        correctAnswer: "They gain the next possession based on the possession arrow's direction"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 8,
+                        question: "What does the possession arrow rule contribute to in basketball?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Team celebrations"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Effective game management"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Individual player statistics"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Referee decisions")
+                        ],
+                        correctAnswer: "Effective game management"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 8,
+                        question: "Why is understanding the possession arrow crucial in basketball?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "It determines the final score"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "It influences the flow of the game"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "It adds pace and excitement"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "It contributes to effective game management")
+                        ],
+                        correctAnswer: "It contributes to effective game management"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 8,
+                        question: "When does the possession arrow come into play in basketball?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "During player substitutions"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "After every basket"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "During jump-ball situations"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "During timeouts")
+                        ],
+                        correctAnswer: "During jump-ball situations"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 9,
+                        question: "What is the primary purpose of the three-second violation in basketball?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To prevent stalling"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To regulate player substitutions"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To encourage camping in the key"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To ensure fair and dynamic gameplay")
+                        ],
+                        correctAnswer: "To ensure fair and dynamic gameplay"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 9,
+                        question: "What happens when a player violates the three-second rule in basketball?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "They receive a warning"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "They gain possession"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "They score additional points"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "It results in a turnover")
+                        ],
+                        correctAnswer: "It results in a turnover"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 9,
+                        question: "Why is the three-second rule important for fair gameplay in basketball?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "It encourages stalling"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "It prevents offensive strategies"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "It promotes camping in the key"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "It prevents unfair advantages and ensures dynamic gameplay")
+                        ],
+                        correctAnswer: "It prevents unfair advantages and ensures dynamic gameplay"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 9,
+                        question: "What area of the basketball court does the three-second violation regulate?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Three-point line"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Half-court line"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Free-throw line"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Key area")
+                        ],
+                        correctAnswer: "Key area"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 9,
+                        question: "What does a three-second violation result in?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Extra points for the opposing team"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "A warning for the violating player"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "A turnover"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Additional time on the shot clock")
+                        ],
+                        correctAnswer: "A turnover"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 9,
+                        question: "How does the three-second rule impact offensive plays near the basket?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "It encourages camping in the key"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "It has no impact on offensive plays"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "It adds strategy and quick decision-making"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "It limits offensive strategies")
+                        ],
+                        correctAnswer: "It adds strategy and quick decision-making"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 10,
+                        question: "What is the primary purpose of the backcourt violation rule in basketball?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To encourage backward ball movement"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To limit offensive strategies"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To prevent stalling"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To emphasize strategic ball movement")
+                        ],
+                        correctAnswer: "To emphasize strategic ball movement"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 10,
+                        question: "What happens when a team commits a backcourt violation in basketball?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "They gain possession"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "They receive a warning"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "They score additional points"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "They lose possession")
+                        ],
+                        correctAnswer: "They lose possession"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 10,
+                        question: "What area of the basketball court does the backcourt violation rule govern?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Three-point line"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Half-court line"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Free-throw line"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Backcourt")
+                        ],
+                        correctAnswer: "Backcourt"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 10,
+                        question: "Why is understanding the backcourt violation rule crucial for both offensive and defensive strategies?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "It limits strategic options for offensive teams"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "It has no impact on defensive strategies"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "It encourages backward ball movement"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "It helps teams balance aggression with precision")
+                        ],
+                        correctAnswer: "It helps teams balance aggression with precision"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 10,
+                        question: "What does a backcourt violation result in?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "A warning for the violating team"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Extra points for the opposing team"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "A turnover"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Additional time on the shot clock")
+                        ],
+                        correctAnswer: "A turnover"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 10,
+                        question: "How do defensive players strategically use the backcourt violation rule?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To encourage backward ball movement"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To limit offensive strategies"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To force turnovers"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "It has no impact on defensive strategies")
+                        ],
+                        correctAnswer: "To force turnovers"
+                    )
+
                 ]
             )
         ),
-        
-        
+
+
         mixed: SelectionModel.Data.SportData (
             players: SelectionModel.Data.SportData.Players(
                 study: [
@@ -5032,7 +4785,7 @@ extension SelectionModel {
                         title: "ATLETICO MADRID",
                         desc: "Club Atlético de Madrid, commonly referred to as Atlético Madrid, is a prestigious football club based in Madrid, Spain. Founded in 1903, Atlético has a rich history and is one of the most successful clubs in Spanish football. The team plays its home matches at the Wanda Metropolitano stadium, known for its vibrant atmosphere and passionate fanbase. Atlético Madrid has a fierce rivalry with Real Madrid, known as the Madrid Derby, which adds to the excitement of their matches. Throughout its history, Atlético Madrid has won numerous domestic and international titles, including La Liga, the Copa del Rey, the UEFA Europa League, and the UEFA Super Cup. The club has a tradition of producing talented players and has been home to some of the footballing world's biggest stars. Known for their defensive solidity, tactical discipline, and never-say-die attitude, Atlético Madrid is a force to be reckoned with in Spanish and European football."
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerStudy(
                         id: 5,
                         title: "LEBRON JAMES",
@@ -5043,19 +4796,18 @@ extension SelectionModel {
                         title: "MICHAEL JORDAN",
                         desc: "Michael Jordan, often referred to by his initials MJ, is a retired professional basketball player and is widely regarded as the greatest basketball player of all time. Born on February 17, 1963, in Brooklyn, New York, Jordan played 15 seasons in the NBA, primarily for the Chicago Bulls. His illustrious career includes six NBA championships, five MVP awards, and numerous scoring titles. Jordan's impact on the game extends beyond his on-court accomplishments; he helped popularize basketball globally and became a cultural icon. His competitive drive, athleticism, and clutch performances in critical moments earned him the nickname 'His Airness.' Even after retirement, Jordan remains heavily involved in basketball as the owner of the Charlotte Hornets and continues to inspire generations of athletes around the world."
                     ),
-                    
                     SelectionModel.Data.SportData.Players.PlayerStudy(
                         id: 7,
                         title: "TORONTO RAPTORS",
                         desc: "The Toronto Raptors are a professional basketball team based in Toronto, Ontario, Canada. They are a member of the Atlantic Division of the Eastern Conference in the National Basketball Association (NBA). Established in 1995 as part of the NBA's expansion into Canada, the Raptors have become a prominent team in the league. They play their home games at the Scotiabank Arena, located in downtown Toronto. Known for their distinctive red, black, and white team colors, the Raptors have cultivated a passionate fan base known as 'Raptor fans' or 'Raptor Nation.' Over the years, the team has seen both highs and lows, but they reached the peak of success by winning their first NBA championship in 2019, defeating the Golden State Warriors in the NBA Finals. Their mascot, 'The Raptor,' is a beloved part of their game experience, entertaining fans with acrobatic stunts and engaging performances."
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerStudy(
                         id: 8,
                         title: "ANTHONY DAVIS",
                         desc: "Anthony Davis is a professional basketball player known for his versatility and dominant presence on both ends of the court. Born on March 11, 1993, in Chicago, Illinois, Davis played college basketball for the University of Kentucky before being selected as the first overall pick in the 2012 NBA Draft by the New Orleans Hornets (now the New Orleans Pelicans). Standing at 6 feet 10 inches tall with exceptional athleticism and skills, Davis quickly made an impact in the NBA. He is known for his shot-blocking ability, rebounding prowess, and scoring versatility, capable of scoring from inside the paint and knocking down mid-range jumpers. Davis has earned multiple NBA All-Star selections and has been named to the All-NBA First Team several times throughout his career. In 2019, Davis was traded to the Los Angeles Lakers, where he formed a formidable duo with LeBron James. He played a pivotal role in helping the Lakers win the NBA championship in 2020, showcasing his defensive prowess and offensive versatility."
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerStudy(
                         id: 9,
                         title: "Harry Kane",
@@ -5066,7 +4818,7 @@ extension SelectionModel {
                         title: "Chelsea",
                         desc: "Chelsea Football Club, founded in 1905, is a professional football team based in London, England. They compete in the Premier League, one of the top football leagues globally. Known as 'The Blues,' Chelsea has a rich history of success, winning multiple domestic and international trophies, including six league titles and the UEFA Champions League. The club's home ground is Stamford Bridge, a stadium with a capacity of over 40,000 spectators. Chelsea has a passionate fan base and a reputation for signing top-tier players from around the world. With a strong emphasis on youth development and a tradition of attacking football, Chelsea is a prominent force in English and European football."
                     )
-                    
+
                 ],
                 test: [
                     SelectionModel.Data.SportData.Players.PlayerTest(
@@ -5080,7 +4832,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Kevin Durant"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 1,
                         question: "When was Kevin Durant born?",
@@ -5092,7 +4844,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "September 29, 1988"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 1,
                         question: "Which NBA team drafted Kevin Durant in the 2007 NBA Draft?",
@@ -5104,7 +4856,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Oklahoma City Thunder"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 1,
                         question: "Which of the following footballers is known for his incredible dribbling skills, precise finishing, and vision on the field?",
@@ -5116,7 +4868,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Lionel Messi"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 1,
                         question: "When was Lionel Messi born?",
@@ -5128,7 +4880,7 @@ extension SelectionModel {
                         ],
                         correctAnswer: "June 24, 1987"
                     ),
-                    
+
                     SelectionModel.Data.SportData.Players.PlayerTest(
                         study_id: 1,
                         question: "Which football club is Lionel Messi currently playing for?",
@@ -5140,53 +4892,2052 @@ extension SelectionModel {
                         ],
                         correctAnswer: "Paris Saint-Germain"
                     ),
-                    
-                    
-                    
-                    
+                    SelectionModel.Data.SportData.Players.PlayerTest(
+                        study_id: 2,
+                        question: "What is Robert Lewandowski's nationality?",
+                        answers: [
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "German"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Polish"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Spanish"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Italian")
+                        ],
+                        correctAnswer: "Polish"
+                    ),
+                    SelectionModel.Data.SportData.Players.PlayerTest(
+                        study_id: 2,
+                        question: "Which club did Robert Lewandowski join for his first professional contract?",
+                        answers: [
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Znicz Pruszków"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Lech Poznań"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Borussia Dortmund"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Bayern Munich")
+                        ],
+                        correctAnswer: "Znicz Pruszków"
+                    ),
+                    SelectionModel.Data.SportData.Players.PlayerTest(
+                        study_id: 2,
+                        question: "Which position does Robert Lewandowski play on the field?",
+                        answers: [
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Goalkeeper"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Defender"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Midfielder"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Striker")
+                        ],
+                        correctAnswer: "Striker"
+                    ),
+                    SelectionModel.Data.SportData.Players.PlayerTest(
+                        study_id: 2,
+                        question: "In which year did Robert Lewandowski join Bayern Munich?",
+                        answers: [
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "2010"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "2012"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "2014"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "2016")
+                        ],
+                        correctAnswer: "2014"
+                    ),
+                    SelectionModel.Data.SportData.Players.PlayerTest(
+                        study_id: 2,
+                        question: "How many goals did Robert Lewandowski score in a single Bundesliga match in 2015?",
+                        answers: [
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "3"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "4"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "5"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "6")
+                        ],
+                        correctAnswer: "5"
+                    ),
+                    SelectionModel.Data.SportData.Players.PlayerTest(
+                        study_id: 2,
+                        question: "Has Robert Lewandowski served as the captain of the Polish national team?",
+                        answers: [
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Yes"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "No")
+                        ],
+                        correctAnswer: "Yes"
+                    ),
+                    SelectionModel.Data.SportData.Players.PlayerTest(
+                        study_id: 3,
+                        question: "Where was Mohamed Salah born?",
+                        answers: [
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Cairo, Egypt"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Nagrig, Egypt"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Alexandria, Egypt"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Luxor, Egypt")
+                        ],
+                        correctAnswer: "Nagrig, Egypt"
+                    ),
+                    SelectionModel.Data.SportData.Players.PlayerTest(
+                        study_id: 3,
+                        question: "In which year did Mohamed Salah join Chelsea?",
+                        answers: [
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "2012"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "2014"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "2016"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "2018")
+                        ],
+                        correctAnswer: "2014"
+                    ),
+                    SelectionModel.Data.SportData.Players.PlayerTest(
+                        study_id: 3,
+                        question: "Before joining Liverpool, Mohamed Salah played for which club?",
+                        answers: [
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "AS Roma"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "El Mokawloon"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Basel"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Chelsea")
+                        ],
+                        correctAnswer: "AS Roma"
+                    ),
+                    SelectionModel.Data.SportData.Players.PlayerTest(
+                        study_id: 3,
+                        question: "Mohamed Salah has won multiple individual awards, including which prestigious accolade?",
+                        answers: [
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Golden Boot"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Ballon d'Or"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "FIFA World Player of the Year"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "PFA Player of the Year")
+                        ],
+                        correctAnswer: "Ballon d'Or"
+                    ),
+                    SelectionModel.Data.SportData.Players.PlayerTest(
+                        study_id: 3,
+                        question: "Mohamed Salah is a key figure for which national football team?",
+                        answers: [
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Morocco"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Algeria"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Tunisia"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Egypt")
+                        ],
+                        correctAnswer: "Egypt"
+                    ),
+                    SelectionModel.Data.SportData.Players.PlayerTest(
+                        study_id: 3,
+                        question: "Which trophies has Mohamed Salah helped Liverpool secure since joining in 2017?",
+                        answers: [
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "FA Cup and EFL Cup"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Premier League and UEFA Champions League"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Copa del Rey and Supercopa de España"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "DFB-Pokal and DFL-Supercup")
+                        ],
+                        correctAnswer: "Premier League and UEFA Champions League"
+                    ),
+                    SelectionModel.Data.SportData.Players.PlayerTest(
+                        study_id: 4,
+                        question: "In which year was Atlético Madrid founded?",
+                        answers: [
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "1899"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "1903"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "1910"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "1925")
+                        ],
+                        correctAnswer: "1903"
+                    ),
+                    SelectionModel.Data.SportData.Players.PlayerTest(
+                        study_id: 4,
+                        question: "What is the name of Atlético Madrid's home stadium?",
+                        answers: [
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Camp Nou"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Santiago Bernabéu"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Wanda Metropolitano"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Estadio Vicente Calderón")
+                        ],
+                        correctAnswer: "Wanda Metropolitano"
+                    ),
+                    SelectionModel.Data.SportData.Players.PlayerTest(
+                        study_id: 4,
+                        question: "Which club shares a fierce rivalry with Atlético Madrid?",
+                        answers: [
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "FC Barcelona"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Real Madrid"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Sevilla FC"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Valencia CF")
+                        ],
+                        correctAnswer: "Real Madrid"
+                    ),
+                    SelectionModel.Data.SportData.Players.PlayerTest(
+                        study_id: 4,
+                        question: "What are some of the titles Atlético Madrid has won?",
+                        answers: [
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Serie A and Coppa Italia"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Premier League and FA Cup"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "La Liga and Copa del Rey"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Bundesliga and DFB-Pokal")
+                        ],
+                        correctAnswer: "La Liga, Copa del Rey, UEFA Europa League, UEFA Super Cup"
+                    ),
+                    SelectionModel.Data.SportData.Players.PlayerTest(
+                        study_id: 4,
+                        question: "What are Atlético Madrid known for in terms of playing style?",
+                        answers: [
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Free-flowing attacking football"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Possession-based play"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Defensive solidity and tactical discipline"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "High-scoring games with flair")
+                        ],
+                        correctAnswer: "Defensive solidity, tactical discipline, and never-say-die attitude"
+                    ),
+                    SelectionModel.Data.SportData.Players.PlayerTest(
+                        study_id: 4,
+                        question: "Where does Atlético Madrid play its home matches?",
+                        answers: [
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "San Siro"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Anfield"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Wanda Metropolitano"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Old Trafford")
+                        ],
+                        correctAnswer: "Wanda Metropolitano"
+                    ),
+                    SelectionModel.Data.SportData.Players.PlayerTest(
+                        study_id: 5,
+                        question: "Where was LeBron James born?",
+                        answers: [
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Chicago, Illinois"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "New York City, New York"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Akron, Ohio"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Los Angeles, California")
+                        ],
+                        correctAnswer: "Akron, Ohio"
+                    ),
+                    SelectionModel.Data.SportData.Players.PlayerTest(
+                        study_id: 5,
+                        question: "In which year was LeBron James born?",
+                        answers: [
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "1980"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "1982"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "1984"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "1986")
+                        ],
+                        correctAnswer: "1984"
+                    ),
+                    SelectionModel.Data.SportData.Players.PlayerTest(
+                        study_id: 5,
+                        question: "Where did LeBron James play college basketball?",
+                        answers: [
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "University of North Carolina"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Duke University"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Kentucky University"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "None (direct to NBA)")
+                        ],
+                        correctAnswer: "None (direct to NBA)"
+                    ),
+                    SelectionModel.Data.SportData.Players.PlayerTest(
+                        study_id: 5,
+                        question: "Which NBA team does LeBron James currently play for?",
+                        answers: [
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Cleveland Cavaliers"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Miami Heat"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Golden State Warriors"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Los Angeles Lakers")
+                        ],
+                        correctAnswer: "Los Angeles Lakers"
+                    ),
+                    SelectionModel.Data.SportData.Players.PlayerTest(
+                        study_id: 5,
+                        question: "How many NBA championships has LeBron James won?",
+                        answers: [
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "1"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "2"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "3"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "4")
+                        ],
+                        correctAnswer: "4"
+                    ),
+                    SelectionModel.Data.SportData.Players.PlayerTest(
+                        study_id: 5,
+                        question: "What is considered one of the most significant moments in LeBron James' career?",
+                        answers: [
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Winning an Olympic gold medal"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Scoring 81 points in a single game"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Achieving a quadruple-double"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Leading the Cleveland Cavaliers to win the 2016 NBA Finals")
+                        ],
+                        correctAnswer: "Leading the Cleveland Cavaliers to win the 2016 NBA Finals"
+                    ),
+                    SelectionModel.Data.SportData.Players.PlayerTest(
+                        study_id: 6,
+                        question: "Where was Michael Jordan born?",
+                        answers: [
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Chicago, Illinois"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "New York City, New York"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Brooklyn, New York"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Los Angeles, California")
+                        ],
+                        correctAnswer: "Brooklyn, New York"
+                    ),
+                    SelectionModel.Data.SportData.Players.PlayerTest(
+                        study_id: 6,
+                        question: "In which year was Michael Jordan born?",
+                        answers: [
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "1958"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "1963"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "1970"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "1975")
+                        ],
+                        correctAnswer: "1963"
+                    ),
+                    SelectionModel.Data.SportData.Players.PlayerTest(
+                        study_id: 6,
+                        question: "Where did Michael Jordan play college basketball?",
+                        answers: [
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "University of North Carolina"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Duke University"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Kentucky University"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "None (direct to NBA)")
+                        ],
+                        correctAnswer: "University of North Carolina"
+                    ),
+                    SelectionModel.Data.SportData.Players.PlayerTest(
+                        study_id: 6,
+                        question: "What is Michael Jordan's current role in basketball?",
+                        answers: [
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "NBA Commissioner"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Head Coach of the Chicago Bulls"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Owner of the Charlotte Hornets"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Lead Analyst on ESPN")
+                        ],
+                        correctAnswer: "Owner of the Charlotte Hornets"
+                    ),
+                    SelectionModel.Data.SportData.Players.PlayerTest(
+                        study_id: 6,
+                        question: "How many MVP awards has Michael Jordan won?",
+                        answers: [
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "2"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "3"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "4"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "5")
+                        ],
+                        correctAnswer: "5"
+                    ),
+                    SelectionModel.Data.SportData.Players.PlayerTest(
+                        study_id: 6,
+                        question: "How many NBA championships did Michael Jordan win?",
+                        answers: [
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "4"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "5"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "6"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "7")
+                        ],
+                        correctAnswer: "6"
+                    ),
+                    SelectionModel.Data.SportData.Players.PlayerTest(
+                        study_id: 7,
+                        question: "Where do the Toronto Raptors play their home games?",
+                        answers: [
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Madison Square Garden"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Scotiabank Arena"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Staples Center"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Air Canada Centre")
+                        ],
+                        correctAnswer: "Scotiabank Arena"
+                    ),
+                    SelectionModel.Data.SportData.Players.PlayerTest(
+                        study_id: 7,
+                        question: "In which year were the Toronto Raptors established?",
+                        answers: [
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "1993"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "1995"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "2000"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "2005")
+                        ],
+                        correctAnswer: "1995"
+                    ),
+                    SelectionModel.Data.SportData.Players.PlayerTest(
+                        study_id: 7,
+                        question: "What are the primary colors of the Toronto Raptors?",
+                        answers: [
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Blue and White"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Red and Black"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Green and Gold"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Purple and Yellow")
+                        ],
+                        correctAnswer: "Red and Black"
+                    ),
+                    SelectionModel.Data.SportData.Players.PlayerTest(
+                        study_id: 7,
+                        question: "What is the name of the Toronto Raptors' mascot?",
+                        answers: [
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "The Raptor"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Rex the Dinosaur"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Roary the Lion"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Thunderbug")
+                        ],
+                        correctAnswer: "The Raptor"
+                    ),
+                    SelectionModel.Data.SportData.Players.PlayerTest(
+                        study_id: 7,
+                        question: "In which year did the Toronto Raptors win their first NBA championship?",
+                        answers: [
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "2016"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "2018"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "2019"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "2020")
+                        ],
+                        correctAnswer: "2019"
+                    ),
+                    SelectionModel.Data.SportData.Players.PlayerTest(
+                        study_id: 7,
+                        question: "What are Toronto Raptors fans often called?",
+                        answers: [
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Raptor Fans"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Scotiabank Supporters"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Maple Leafs"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Raptor Nation")
+                        ],
+                        correctAnswer: "Raptor Nation"
+                    ),
+                    SelectionModel.Data.SportData.Players.PlayerTest(
+                        study_id: 8,
+                        question: "What is Anthony Davis's height?",
+                        answers: [
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "6 feet 8 inches"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "6 feet 10 inches"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "7 feet 1 inch"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "6 feet 6 inches")
+                        ],
+                        correctAnswer: "6 feet 10 inches"
+                    ),
+                    SelectionModel.Data.SportData.Players.PlayerTest(
+                        study_id: 8,
+                        question: "On which date was Anthony Davis born?",
+                        answers: [
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "March 11, 1991"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "March 11, 1992"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "March 11, 1993"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "March 11, 1994")
+                        ],
+                        correctAnswer: "March 11, 1993"
+                    ),
+                    SelectionModel.Data.SportData.Players.PlayerTest(
+                        study_id: 8,
+                        question: "Which university did Anthony Davis play college basketball for?",
+                        answers: [
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "University of North Carolina"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Duke University"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "University of Kentucky"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "University of Kansas")
+                        ],
+                        correctAnswer: "University of Kentucky"
+                    ),
+                    SelectionModel.Data.SportData.Players.PlayerTest(
+                        study_id: 8,
+                        question: "Which NBA team drafted Anthony Davis as the first overall pick in the 2012 NBA Draft?",
+                        answers: [
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "New Orleans Hornets"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Los Angeles Lakers"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Chicago Bulls"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Golden State Warriors")
+                        ],
+                        correctAnswer: "New Orleans Hornets"
+                    ),
+                    SelectionModel.Data.SportData.Players.PlayerTest(
+                        study_id: 8,
+                        question: "Who did Anthony Davis form a formidable duo with on the Los Angeles Lakers?",
+                        answers: [
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Stephen Curry"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "James Harden"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "LeBron James"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Kevin Durant")
+                        ],
+                        correctAnswer: "LeBron James"
+                    ),
+                    SelectionModel.Data.SportData.Players.PlayerTest(
+                        study_id: 8,
+                        question: "In which year did Anthony Davis help the Los Angeles Lakers win the NBA championship?",
+                        answers: [
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "2019"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "2020"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "2021"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "2022")
+                        ],
+                        correctAnswer: "2020"
+                    ),
+                    SelectionModel.Data.SportData.Players.PlayerTest(
+                        study_id: 9,
+                        question: "On which date was Harry Kane born?",
+                        answers: [
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "July 28, 1991"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "July 28, 1992"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "July 28, 1993"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "July 28, 1994")
+                        ],
+                        correctAnswer: "July 28, 1993"
+                    ),
+                    SelectionModel.Data.SportData.Players.PlayerTest(
+                        study_id: 9,
+                        question: "Which club does Harry Kane currently play for in the English Premier League?",
+                        answers: [
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Manchester United"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Chelsea"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Liverpool"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Tottenham Hotspur")
+                        ],
+                        correctAnswer: "Tottenham Hotspur"
+                    ),
+                    SelectionModel.Data.SportData.Players.PlayerTest(
+                        study_id: 9,
+                        question: "What individual award has Harry Kane won multiple times?",
+                        answers: [
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "FIFA Ballon d'Or"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "UEFA Champions League Player of the Season"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Premier League Player of the Season"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Golden Boot")
+                        ],
+                        correctAnswer: "Golden Boot"
+                    ),
+                    SelectionModel.Data.SportData.Players.PlayerTest(
+                        study_id: 9,
+                        question: "At what age did Harry Kane join Tottenham's youth academy?",
+                        answers: [
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "8"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "10"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "12"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "14")
+                        ],
+                        correctAnswer: "8"
+                    ),
+                    SelectionModel.Data.SportData.Players.PlayerTest(
+                        study_id: 9,
+                        question: "In which year did Harry Kane lead the England national team to the final of the UEFA European Championship?",
+                        answers: [
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "2018"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "2019"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "2020"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "2021")
+                        ],
+                        correctAnswer: "2021"
+                    ),
+                    SelectionModel.Data.SportData.Players.PlayerTest(
+                        study_id: 9,
+                        question: "What is one of Harry Kane's known strengths in his style of play?",
+                        answers: [
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Speed and agility"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Long-range shooting"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Physical strength and aerial ability"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Dribbling and ball control")
+                        ],
+                        correctAnswer: "Physical strength and aerial ability"
+                    ),
+                    SelectionModel.Data.SportData.Players.PlayerTest(
+                        study_id: 10,
+                        question: "In which year was Chelsea Football Club founded?",
+                        answers: [
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "1885"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "1895"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "1905"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "1915")
+                        ],
+                        correctAnswer: "1905"
+                    ),
+                    SelectionModel.Data.SportData.Players.PlayerTest(
+                        study_id: 10,
+                        question: "What is the nickname of Chelsea Football Club?",
+                        answers: [
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "The Reds"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "The Blues"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "The Whites"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "The Greens")
+                        ],
+                        correctAnswer: "The Blues"
+                    ),
+                    SelectionModel.Data.SportData.Players.PlayerTest(
+                        study_id: 10,
+                        question: "How many league titles has Chelsea Football Club won?",
+                        answers: [
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "3"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "5"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "6"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "8")
+                        ],
+                        correctAnswer: "6"
+                    ),
+                    SelectionModel.Data.SportData.Players.PlayerTest(
+                        study_id: 10,
+                        question: "What is the name of Chelsea Football Club's home ground?",
+                        answers: [
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Old Trafford"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Anfield"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Stamford Bridge"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Emirates Stadium")
+                        ],
+                        correctAnswer: "Stamford Bridge"
+                    ),
+                    SelectionModel.Data.SportData.Players.PlayerTest(
+                        study_id: 10,
+                        question: "In which city is Chelsea Football Club based?",
+                        answers: [
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Manchester"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Liverpool"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "London"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Birmingham")
+                        ],
+                        correctAnswer: "London"
+                    ),
+                    SelectionModel.Data.SportData.Players.PlayerTest(
+                        study_id: 10,
+                        question: "What is one of the characteristics of Chelsea Football Club's approach, emphasizing the development of young players?",
+                        answers: [
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Signing only experienced players"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Focusing on defensive football"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Avoiding international signings"),
+                            SelectionModel.Data.SportData.Players.PlayerTest.Answer(answer: "Strong emphasis on youth development")
+                        ],
+                        correctAnswer: "Strong emphasis on youth development"
+                    )
                 ]
             ),
             clubs: SelectionModel.Data.SportData.Clubs(
                 study: [
-                    SelectionModel.Data.SportData.Clubs.ClubStudy(
-                        id: 1,
-                        title: "LIONEL MESSI",
-                        desc: "Lionel Messi has played for FC Barcelona and Paris Saint-Germain (PSG). During his time with Barcelona, Messi achieved numerous successes, including multiple UEFA Champions League and La Liga titles. In 2021, he joined PSG, continuing to showcase his exceptional talent at the highest level of the sport."
-                    )
-                ],
+                        // Football Club Study
+                        SelectionModel.Data.SportData.Clubs.ClubStudy(
+                            id: 1,
+                            title: "Real Madrid",
+                            desc: "Real Madrid Club de Fútbol, commonly known as Real Madrid, is a legendary football club based in Madrid, Spain. Founded in 1902, Real Madrid has a rich history and is considered one of the most successful clubs globally. The team plays its home matches at the Santiago Bernabéu Stadium. Real Madrid has won numerous domestic and international titles, including a record number of UEFA Champions League trophies. Known for their 'Galácticos' era, the club has featured some of the greatest footballers in history. Real Madrid's style is characterized by attacking flair, possession-based play, and a commitment to entertaining football."
+                        ),
+                        
+                        // Basketball Club Study
+                        SelectionModel.Data.SportData.Clubs.ClubStudy(
+                            id: 2,
+                            title: "Los Angeles Lakers",
+                            desc: "The Los Angeles Lakers are a storied basketball franchise based in Los Angeles, California. Founded in 1947, the Lakers are one of the most successful and popular teams in the NBA. The team plays its home games at the Staples Center. The Lakers have a rich history, boasting numerous NBA championships. The franchise has been home to legendary players such as Magic Johnson, Kobe Bryant, and Shaquille O'Neal. Known for their 'Showtime' era and dominance in the 2000s, the Lakers have a tradition of excellence, emphasizing a fast-paced and exciting style of play. The purple and gold colors of the Lakers are iconic in the world of basketball."
+                        ),
+                        
+                        // Additional Football Club Study
+                        SelectionModel.Data.SportData.Clubs.ClubStudy(
+                            id: 3,
+                            title: "FC Barcelona",
+                            desc: "Futbol Club Barcelona, commonly known as Barcelona or Barça, is a prestigious football club based in Barcelona, Catalonia, Spain. Founded in 1899, Barcelona has a rich history and is renowned for its commitment to 'mes que un club' (more than a club). The team plays its home matches at the Camp Nou stadium. Barcelona has won numerous domestic and international titles, including multiple UEFA Champions League trophies. The club is famous for its philosophy of tiki-taka football, emphasizing possession, quick passing, and attacking creativity. Barcelona's colors, blue and red, symbolize the pride and passion of the Catalan region."
+                        ),
+                        
+                        // Additional Basketball Club Study
+                        SelectionModel.Data.SportData.Clubs.ClubStudy(
+                            id: 4,
+                            title: "Golden State Warriors",
+                            desc: "The Golden State Warriors are a professional basketball team based in San Francisco, California. Established in 1946, the Warriors are known for their success in the NBA. The team plays its home games at the Chase Center. The Warriors have achieved significant success in recent years, winning multiple NBA championships. They are recognized for their 'Splash Brothers' era, featuring sharpshooting guards Stephen Curry and Klay Thompson. The team's style is characterized by three-point shooting, fast-paced gameplay, and strong team chemistry. The blue and gold colors of the Warriors reflect the vibrant spirit and history of the franchise."
+                        ),
+                        
+                        // Another Football Club Study
+                        SelectionModel.Data.SportData.Clubs.ClubStudy(
+                            id: 5,
+                            title: "Liverpool FC",
+                            desc: "Liverpool Football Club, commonly known as Liverpool FC or simply Liverpool, is a highly successful football club based in Liverpool, England. Founded in 1892, Liverpool has a storied history and plays its home matches at Anfield. The club has won numerous domestic and international honors, including multiple UEFA Champions League titles. Liverpool is famous for its passionate fanbase, known as the 'Kop,' and its anthem 'You'll Never Walk Alone.' The team's playing style is characterized by high-intensity pressing, fast counter-attacks, and entertaining attacking football. The iconic all-red kit symbolizes the club's rich tradition and commitment to excellence."
+                        ),
+                        
+                        // Another Basketball Club Study
+                        SelectionModel.Data.SportData.Clubs.ClubStudy(
+                            id: 6,
+                            title: "Chicago Bulls",
+                            desc: "The Chicago Bulls are a historic basketball franchise based in Chicago, Illinois. Established in 1966, the Bulls are known for their success in the NBA. The team plays its home games at the United Center. The Bulls achieved global recognition in the 1990s under the leadership of Michael Jordan, winning six NBA championships. The team's playing style is characterized by tenacious defense, fast breaks, and iconic moments. The red, black, and white colors of the Bulls are synonymous with the team's fierce competitiveness and enduring legacy in the world of basketball."
+                        ),
+                        
+                        // Another Football Club Study
+                        SelectionModel.Data.SportData.Clubs.ClubStudy(
+                            id: 7,
+                            title: "AC Milan",
+                            desc: "Associazione Calcio Milan, commonly known as AC Milan, is a prestigious football club based in Milan, Italy. Founded in 1899, AC Milan has a rich history and plays its home matches at the San Siro stadium. The club has won numerous domestic and international titles, including multiple UEFA Champions League trophies. AC Milan is renowned for its stylish and attacking brand of football, with a focus on teamwork and technical prowess. The iconic red and black stripes of AC Milan's kit represent the club's passion, tradition, and commitment to success in Italian and European football."
+                        ),
+                        
+                        // Another Basketball Club Study
+                        SelectionModel.Data.SportData.Clubs.ClubStudy(
+                            id: 8,
+                            title: "Miami Heat",
+                            desc: "The Miami Heat are a professional basketball team based in Miami, Florida. Established in 1988, the Heat have become a prominent force in the NBA. The team plays its home games at the American Airlines Arena. The Heat gained international recognition in the 2000s and 2010s, winning multiple NBA championships. Known for their 'Heat culture,' the team emphasizes hard work, discipline, and a commitment to success. The red, black, and white colors of the Heat symbolize the intensity and energy that the team brings to the court, making them a formidable presence in the world of basketball."
+                        ),
+                        
+                        // Another Football Club Study
+                        SelectionModel.Data.SportData.Clubs.ClubStudy(
+                            id: 9,
+                            title: "Borussia Dortmund",
+                            desc: "Ballspielverein Borussia 09 e.V. Dortmund, commonly known as Borussia Dortmund or BVB, is a renowned football club based in Dortmund, Germany. Founded in 1909, Borussia Dortmund has a passionate fanbase and plays its home matches at Signal Iduna Park. The club has won domestic and international honors, including the UEFA Champions League. Borussia Dortmund is known for its electrifying attacking style, characterized by fast-paced transitions and loyal support from the 'Yellow Wall' – the team's vibrant and vocal fan section. The iconic yellow and black colors of BVB represent the energy, determination, and unity of the club."
+                        ),
+                        
+                        // Another Basketball Club Study
+                        SelectionModel.Data.SportData.Clubs.ClubStudy(
+                            id: 10,
+                            title: "Toronto Raptors",
+                            desc: "The Toronto Raptors are a professional basketball team based in Toronto, Ontario, Canada. Established in 1995, the Raptors have become a prominent force in the NBA. The team plays its home games at the Scotiabank Arena. The Raptors gained international recognition by winning their first NBA championship in 2019. Known for their passionate fanbase, innovative branding, and diverse roster, the Raptors bring a unique Canadian flavor to the league. The red, black, and white colors of the Raptors reflect the team's identity and resilience, making them a captivating presence in the world of basketball."
+                        )
+                    ],
                 test: [
                     SelectionModel.Data.SportData.Clubs.ClubTest(
-                        study_id: 1,
-                        question: "In which club did Lionel Messi play before joining Paris Saint-Germain (PSG)?",
+                            study_id: 1,
+                            question: "When was Real Madrid Club de Fútbol founded?",
+                            answers: [
+                                SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "1898"),
+                                SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "1902"),
+                                SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "1910"),
+                                SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "1925")
+                            ],
+                            correctAnswer: "1902"
+                        ),
+                        SelectionModel.Data.SportData.Clubs.ClubTest(
+                            study_id: 1,
+                            question: "Where does Real Madrid play its home matches?",
+                            answers: [
+                                SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Santiago Bernabéu Stadium"),
+                                SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Camp Nou"),
+                                SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Old Trafford"),
+                                SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "San Siro Stadium")
+                            ],
+                            correctAnswer: "Santiago Bernabéu Stadium"
+                        ),
+                        SelectionModel.Data.SportData.Clubs.ClubTest(
+                            study_id: 1,
+                            question: "What is Real Madrid known for during the 'Galácticos' era?",
+                            answers: [
+                                SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Defensive solidity"),
+                                SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Youth development"),
+                                SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Possession-based play"),
+                                SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Featuring great footballers")
+                            ],
+                            correctAnswer: "Featuring great footballers"
+                        ),
+                        SelectionModel.Data.SportData.Clubs.ClubTest(
+                            study_id: 1,
+                            question: "How many UEFA Champions League trophies has Real Madrid won?",
+                            answers: [
+                                SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "3"),
+                                SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "7"),
+                                SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "11"),
+                                SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Record number")
+                            ],
+                            correctAnswer: "Record number"
+                        ),
+                        SelectionModel.Data.SportData.Clubs.ClubTest(
+                            study_id: 1,
+                            question: "What style characterizes Real Madrid's play?",
+                            answers: [
+                                SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Defensive counter-attacks"),
+                                SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Direct long balls"),
+                                SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Possession-based play"),
+                                SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Slow-paced buildup")
+                            ],
+                            correctAnswer: "Possession-based play"
+                        ),
+                        SelectionModel.Data.SportData.Clubs.ClubTest(
+                            study_id: 1,
+                            question: "Who plays their home games at the Santiago Bernabéu Stadium?",
+                            answers: [
+                                SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Barcelona"),
+                                SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Real Madrid"),
+                                SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Manchester United"),
+                                SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "AC Milan")
+                            ],
+                            correctAnswer: "Real Madrid"
+                        ),
+                    SelectionModel.Data.SportData.Clubs.ClubTest(
+                            study_id: 2,
+                            question: "When were the Los Angeles Lakers founded?",
+                            answers: [
+                                SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "1950"),
+                                SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "1965"),
+                                SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "1947"),
+                                SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "1972")
+                            ],
+                            correctAnswer: "1947"
+                        ),
+                        SelectionModel.Data.SportData.Clubs.ClubTest(
+                            study_id: 2,
+                            question: "Where do the Los Angeles Lakers play their home games?",
+                            answers: [
+                                SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Madison Square Garden"),
+                                SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Staples Center"),
+                                SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Oracle Arena"),
+                                SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Fiserv Forum")
+                            ],
+                            correctAnswer: "Staples Center"
+                        ),
+                        SelectionModel.Data.SportData.Clubs.ClubTest(
+                            study_id: 2,
+                            question: "Who are some legendary players associated with the Los Angeles Lakers?",
+                            answers: [
+                                SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Michael Jordan, Larry Bird, Hakeem Olajuwon"),
+                                SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Magic Johnson, Kobe Bryant, Shaquille O'Neal"),
+                                SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "LeBron James, Kevin Durant, Stephen Curry"),
+                                SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Tim Duncan, Dirk Nowitzki, Dwyane Wade")
+                            ],
+                            correctAnswer: "Magic Johnson, Kobe Bryant, Shaquille O'Neal"
+                        ),
+                        SelectionModel.Data.SportData.Clubs.ClubTest(
+                            study_id: 2,
+                            question: "What era is known for the Lakers' dominance?",
+                            answers: [
+                                SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "1970s"),
+                                SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "1990s"),
+                                SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "1980s"),
+                                SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "2000s")
+                            ],
+                            correctAnswer: "2000s"
+                        ),
+                        SelectionModel.Data.SportData.Clubs.ClubTest(
+                            study_id: 2,
+                            question: "What colors are iconic for the Los Angeles Lakers?",
+                            answers: [
+                                SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Red and white"),
+                                SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Blue and yellow"),
+                                SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Green and gold"),
+                                SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Purple and gold")
+                            ],
+                            correctAnswer: "Purple and gold"
+                        ),
+                        SelectionModel.Data.SportData.Clubs.ClubTest(
+                            study_id: 2,
+                            question: "Which stadium hosts the home games of the Los Angeles Lakers?",
+                            answers: [
+                                SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Staples Center"),
+                                SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Madison Square Garden"),
+                                SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Oracle Arena"),
+                                SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Fiserv Forum")
+                            ],
+                            correctAnswer: "Staples Center"
+                        ),
+                    SelectionModel.Data.SportData.Clubs.ClubTest(
+                        study_id: 3,
+                        question: "When was Futbol Club Barcelona founded?",
                         answers: [
-                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Real Madrid"),
-                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "FC Barcelona"),
-                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Manchester United"),
-                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Juventus")
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "1905"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "1910"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "1899"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "1925")
                         ],
-                        correctAnswer: "FC Barcelona"
+                        correctAnswer: "1899"
+                    ),
+                    SelectionModel.Data.SportData.Clubs.ClubTest(
+                        study_id: 3,
+                        question: "Where does FC Barcelona play its home matches?",
+                        answers: [
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Santiago Bernabéu Stadium"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "San Siro Stadium"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Camp Nou stadium"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Old Trafford")
+                        ],
+                        correctAnswer: "Camp Nou stadium"
+                    ),
+                    SelectionModel.Data.SportData.Clubs.ClubTest(
+                        study_id: 3,
+                        question: "What does the phrase 'mes que un club' signify?",
+                        answers: [
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "More than a club"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Only a club"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Just a club"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Less than a club")
+                        ],
+                        correctAnswer: "More than a club"
+                    ),
+                    SelectionModel.Data.SportData.Clubs.ClubTest(
+                        study_id: 3,
+                        question: "Which stadium hosts the home matches of FC Barcelona?",
+                        answers: [
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Anfield"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Wanda Metropolitano"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Camp Nou stadium"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Allianz Arena")
+                        ],
+                        correctAnswer: "Camp Nou stadium"
+                    ),
+                    SelectionModel.Data.SportData.Clubs.ClubTest(
+                        study_id: 3,
+                        question: "What colors symbolize Barcelona's pride and passion?",
+                        answers: [
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Blue and white"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Blue and red"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Red and black"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Green and yellow")
+                        ],
+                        correctAnswer: "Blue and red"
+                    ),
+                    SelectionModel.Data.SportData.Clubs.ClubTest(
+                        study_id: 3,
+                        question: "What is Barcelona's football philosophy known as?",
+                        answers: [
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Total football"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Catennaccio"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Tiki-taka"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Gegenpressing")
+                        ],
+                        correctAnswer: "Tiki-taka"
+                    ),
+                    SelectionModel.Data.SportData.Clubs.ClubTest(
+                        study_id: 4,
+                        question: "When were the Golden State Warriors established?",
+                        answers: [
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "1955"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "1967"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "1946"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "1972")
+                        ],
+                        correctAnswer: "1946"
+                    ),
+                    SelectionModel.Data.SportData.Clubs.ClubTest(
+                        study_id: 4,
+                        question: "Where do the Golden State Warriors play their home games?",
+                        answers: [
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Madison Square Garden"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Staples Center"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Chase Center"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Barclays Center")
+                        ],
+                        correctAnswer: "Chase Center"
+                    ),
+                    SelectionModel.Data.SportData.Clubs.ClubTest(
+                        study_id: 4,
+                        question: "What era of the Golden State Warriors is known as the 'Splash Brothers' era?",
+                        answers: [
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Magic Johnson era"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Michael Jordan era"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Kobe Bryant era"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Splash Brothers era")
+                        ],
+                        correctAnswer: "Splash Brothers era"
+                    ),
+                    SelectionModel.Data.SportData.Clubs.ClubTest(
+                        study_id: 4,
+                        question: "Which colors reflect the vibrant spirit and history of the Golden State Warriors?",
+                        answers: [
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Red and white"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Blue and gold"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Black and silver"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Green and yellow")
+                        ],
+                        correctAnswer: "Blue and gold"
+                    ),
+                    SelectionModel.Data.SportData.Clubs.ClubTest(
+                        study_id: 4,
+                        question: "What is the distinctive style of the Golden State Warriors?",
+                        answers: [
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Slow-paced gameplay"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Three-point shooting"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Strong defense"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Post-up offense")
+                        ],
+                        correctAnswer: "Three-point shooting"
+                    ),
+                    SelectionModel.Data.SportData.Clubs.ClubTest(
+                        study_id: 4,
+                        question: "Who are the notable players associated with the 'Splash Brothers' era?",
+                        answers: [
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "LeBron James and Anthony Davis"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Stephen Curry and Klay Thompson"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Kevin Durant and James Harden"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Chris Paul and Blake Griffin")
+                        ],
+                        correctAnswer: "Stephen Curry and Klay Thompson"
+                    ),
+                    SelectionModel.Data.SportData.Clubs.ClubTest(
+                        study_id: 5,
+                        question: "When was Liverpool Football Club founded?",
+                        answers: [
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "1874"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "1892"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "1905"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "1920")
+                        ],
+                        correctAnswer: "1892"
+                    ),
+                    SelectionModel.Data.SportData.Clubs.ClubTest(
+                        study_id: 5,
+                        question: "Where does Liverpool FC play its home matches?",
+                        answers: [
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Old Trafford"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Anfield"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Etihad Stadium"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Stamford Bridge")
+                        ],
+                        correctAnswer: "Anfield"
+                    ),
+                    SelectionModel.Data.SportData.Clubs.ClubTest(
+                        study_id: 5,
+                        question: "What is the anthem of Liverpool FC?",
+                        answers: [
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "'You're the Best Around'"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "'Don't Stop Believin'"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "'We Will Rock You'"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "'You'll Never Walk Alone'")
+                        ],
+                        correctAnswer: "'You'll Never Walk Alone'"
+                    ),
+                    SelectionModel.Data.SportData.Clubs.ClubTest(
+                        study_id: 5,
+                        question: "What does the term 'Kop' refer to in relation to Liverpool FC?",
+                        answers: [
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "A famous player"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "A trophy"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "The team's stadium"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "The passionate fanbase")
+                        ],
+                        correctAnswer: "The passionate fanbase"
+                    ),
+                    SelectionModel.Data.SportData.Clubs.ClubTest(
+                        study_id: 5,
+                        question: "What colors symbolize Liverpool FC's rich tradition and commitment to excellence?",
+                        answers: [
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Blue and white"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Green and yellow"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Red and black"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "All-red")
+                        ],
+                        correctAnswer: "All-red"
+                    ),
+                    SelectionModel.Data.SportData.Clubs.ClubTest(
+                        study_id: 5,
+                        question: "What style characterizes Liverpool FC's playing style?",
+                        answers: [
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Slow build-up play"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Defensive approach"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "High-intensity pressing"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Long ball tactics")
+                        ],
+                        correctAnswer: "High-intensity pressing"
+                    ),
+                    SelectionModel.Data.SportData.Clubs.ClubTest(
+                        study_id: 6,
+                        question: "In which decade did the Chicago Bulls achieve global recognition by winning six NBA championships?",
+                        answers: [
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "1980s"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "1990s"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "2000s"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "2010s")
+                        ],
+                        correctAnswer: "1990s"
+                    ),
+                    SelectionModel.Data.SportData.Clubs.ClubTest(
+                        study_id: 6,
+                        question: "Where do the Chicago Bulls play their home games?",
+                        answers: [
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Madison Square Garden"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Staples Center"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "United Center"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Oracle Arena")
+                        ],
+                        correctAnswer: "United Center"
+                    ),
+                    SelectionModel.Data.SportData.Clubs.ClubTest(
+                        study_id: 6,
+                        question: "Who was a key figure in the Chicago Bulls' success during the 1990s?",
+                        answers: [
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Kobe Bryant"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "LeBron James"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Michael Jordan"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Tim Duncan")
+                        ],
+                        correctAnswer: "Michael Jordan"
+                    ),
+                    SelectionModel.Data.SportData.Clubs.ClubTest(
+                        study_id: 6,
+                        question: "What colors are synonymous with the Chicago Bulls' fierce competitiveness and enduring legacy?",
+                        answers: [
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Blue and yellow"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Red and black"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Green and white"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Purple and gold")
+                        ],
+                        correctAnswer: "Red and black"
+                    ),
+                    SelectionModel.Data.SportData.Clubs.ClubTest(
+                        study_id: 6,
+                        question: "What is the iconic home arena of the Chicago Bulls?",
+                        answers: [
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Madison Square Garden"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "United Center"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Staples Center"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Oracle Arena")
+                        ],
+                        correctAnswer: "United Center"
+                    ),
+                    SelectionModel.Data.SportData.Clubs.ClubTest(
+                        study_id: 6,
+                        question: "What style characterizes the Chicago Bulls' playing style?",
+                        answers: [
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Slow-paced offense"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Tenacious defense"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Long-range shooting"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Isolation plays")
+                        ],
+                        correctAnswer: "Tenacious defense"
+                    ),
+                    SelectionModel.Data.SportData.Clubs.ClubTest(
+                        study_id: 7,
+                        question: "Where does AC Milan play its home matches?",
+                        answers: [
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Allianz Stadium"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "San Siro"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Camp Nou"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Old Trafford")
+                        ],
+                        correctAnswer: "San Siro"
+                    ),
+                    SelectionModel.Data.SportData.Clubs.ClubTest(
+                        study_id: 7,
+                        question: "In which country is AC Milan based?",
+                        answers: [
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Germany"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Spain"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Italy"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "France")
+                        ],
+                        correctAnswer: "Italy"
+                    ),
+                    SelectionModel.Data.SportData.Clubs.ClubTest(
+                        study_id: 7,
+                        question: "What do the red and black stripes on AC Milan's kit represent?",
+                        answers: [
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Loyalty and honesty"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Power and aggression"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Passion, tradition, and commitment"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Innovation and modernity")
+                        ],
+                        correctAnswer: "Passion, tradition, and commitment"
+                    ),
+                    SelectionModel.Data.SportData.Clubs.ClubTest(
+                        study_id: 7,
+                        question: "Which stadium is known as the home of AC Milan?",
+                        answers: [
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Allianz Stadium"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "San Siro"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Camp Nou"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Old Trafford")
+                        ],
+                        correctAnswer: "San Siro"
+                    ),
+                    SelectionModel.Data.SportData.Clubs.ClubTest(
+                        study_id: 7,
+                        question: "What is AC Milan renowned for in terms of playing style?",
+                        answers: [
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Defensive football"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Counter-attacking"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Stylish and attacking brand of football"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Long-ball tactics")
+                        ],
+                        correctAnswer: "Stylish and attacking brand of football"
+                    ),
+                    SelectionModel.Data.SportData.Clubs.ClubTest(
+                        study_id: 7,
+                        question: "When was AC Milan founded?",
+                        answers: [
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "1899"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "1905"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "1920"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "1947")
+                        ],
+                        correctAnswer: "1899"
+                    ),
+                    SelectionModel.Data.SportData.Clubs.ClubTest(
+                        study_id: 8,
+                        question: "In which city are the Miami Heat based?",
+                        answers: [
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Orlando"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Miami"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Tampa Bay"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Jacksonville")
+                        ],
+                        correctAnswer: "Miami"
+                    ),
+                    SelectionModel.Data.SportData.Clubs.ClubTest(
+                        study_id: 8,
+                        question: "When was the Miami Heat established?",
+                        answers: [
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "1975"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "1988"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "1996"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "2005")
+                        ],
+                        correctAnswer: "1988"
+                    ),
+                    SelectionModel.Data.SportData.Clubs.ClubTest(
+                        study_id: 8,
+                        question: "Which arena is the home venue for the Miami Heat?",
+                        answers: [
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Madison Square Garden"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Staples Center"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "American Airlines Arena"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Fiserv Forum")
+                        ],
+                        correctAnswer: "American Airlines Arena"
+                    ),
+                    SelectionModel.Data.SportData.Clubs.ClubTest(
+                        study_id: 8,
+                        question: "What do the red, black, and white colors of the Miami Heat symbolize?",
+                        answers: [
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Sadness and humility"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Peace and tranquility"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Intensity and energy"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Innovation and modernity")
+                        ],
+                        correctAnswer: "Intensity and energy"
+                    ),
+                    SelectionModel.Data.SportData.Clubs.ClubTest(
+                        study_id: 8,
+                        question: "What is the Miami Heat known for in terms of team culture?",
+                        answers: [
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Laid-back atmosphere"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Hard work, discipline, and a commitment to success"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Celebrity endorsements"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Isolation and individualism")
+                        ],
+                        correctAnswer: "Hard work, discipline, and a commitment to success"
+                    ),
+                    SelectionModel.Data.SportData.Clubs.ClubTest(
+                        study_id: 8,
+                        question: "How many NBA championships have the Miami Heat won?",
+                        answers: [
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "1"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "3"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "5"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "7")
+                        ],
+                        correctAnswer: "3"
+                    ),
+                    SelectionModel.Data.SportData.Clubs.ClubTest(
+                        study_id: 9,
+                        question: "In which city is Borussia Dortmund based?",
+                        answers: [
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Berlin"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Munich"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Hamburg"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Dortmund")
+                        ],
+                        correctAnswer: "Dortmund"
+                    ),
+                    SelectionModel.Data.SportData.Clubs.ClubTest(
+                        study_id: 9,
+                        question: "When was Borussia Dortmund founded?",
+                        answers: [
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "1899"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "1905"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "1909"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "1915")
+                        ],
+                        correctAnswer: "1909"
+                    ),
+                    SelectionModel.Data.SportData.Clubs.ClubTest(
+                        study_id: 9,
+                        question: "What is the home stadium of Borussia Dortmund?",
+                        answers: [
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Allianz Arena"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Veltins-Arena"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Signal Iduna Park"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Mercedes-Benz Arena")
+                        ],
+                        correctAnswer: "Signal Iduna Park"
+                    ),
+                    SelectionModel.Data.SportData.Clubs.ClubTest(
+                        study_id: 9,
+                        question: "What does the 'Yellow Wall' represent for Borussia Dortmund?",
+                        answers: [
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "A yellow-colored stadium wall"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "A famous landmark in Dortmund"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "The team's vibrant and vocal fan section"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "A nickname for the team captain")
+                        ],
+                        correctAnswer: "The team's vibrant and vocal fan section"
+                    ),
+                    SelectionModel.Data.SportData.Clubs.ClubTest(
+                        study_id: 9,
+                        question: "What do the yellow and black colors of Borussia Dortmund symbolize?",
+                        answers: [
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Sadness and humility"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Energy, determination, and unity"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Peace and tranquility"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Innovation and modernity")
+                        ],
+                        correctAnswer: "Energy, determination, and unity"
+                    ),
+                    SelectionModel.Data.SportData.Clubs.ClubTest(
+                        study_id: 9,
+                        question: "How many UEFA Champions League titles has Borussia Dortmund won?",
+                        answers: [
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "1"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "2"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "3"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "4")
+                        ],
+                        correctAnswer: "1"
+                    ),
+                    SelectionModel.Data.SportData.Clubs.ClubTest(
+                        study_id: 10,
+                        question: "In which city are the Toronto Raptors based?",
+                        answers: [
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Vancouver"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Montreal"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Ottawa"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Toronto")
+                        ],
+                        correctAnswer: "Toronto"
+                    ),
+                    SelectionModel.Data.SportData.Clubs.ClubTest(
+                        study_id: 10,
+                        question: "When were the Toronto Raptors established?",
+                        answers: [
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "1985"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "1990"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "1995"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "2000")
+                        ],
+                        correctAnswer: "1995"
+                    ),
+                    SelectionModel.Data.SportData.Clubs.ClubTest(
+                        study_id: 10,
+                        question: "Where do the Toronto Raptors play their home games?",
+                        answers: [
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Rogers Centre"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Scotiabank Arena"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Air Canada Centre"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Bell Centre")
+                        ],
+                        correctAnswer: "Scotiabank Arena"
+                    ),
+                    SelectionModel.Data.SportData.Clubs.ClubTest(
+                        study_id: 10,
+                        question: "What is a notable achievement of the Toronto Raptors?",
+                        answers: [
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Winning the NBA Finals in 2019"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Setting the record for most regular-season wins"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Producing the league's top scorer"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Having the longest winning streak in NBA history")
+                        ],
+                        correctAnswer: "Winning the NBA Finals in 2019"
+                    ),
+                    SelectionModel.Data.SportData.Clubs.ClubTest(
+                        study_id: 10,
+                        question: "What colors represent the identity of the Toronto Raptors?",
+                        answers: [
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Blue and white"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Red, black, and white"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Green and gold"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Purple and gold")
+                        ],
+                        correctAnswer: "Red, black, and white"
+                    ),
+                    SelectionModel.Data.SportData.Clubs.ClubTest(
+                        study_id: 10,
+                        question: "What makes the Toronto Raptors a captivating presence in basketball?",
+                        answers: [
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Their dominant big man"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Unique Canadian flavor"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Longest winning streak"),
+                            SelectionModel.Data.SportData.Clubs.ClubTest.Answer(answer: "Defensive prowess")
+                        ],
+                        correctAnswer: "Unique Canadian flavor"
                     )
+                    
+                    
                 ]
             ),
             rules: SelectionModel.Data.SportData.Rules(
                 study: [
-                    SelectionModel.Data.SportData.Rules.RulesStudy(
-                        id: 1,
-                        title: "LIONEL MESSI",
-                        desc: "Lionel Messi has consistently demonstrated adherence to fair play and sportsmanship throughout his career. Despite facing tough opponents and intense competition, Messi is known for his humility on and off the field. He has set a positive example for aspiring footballers worldwide."
-                    )
-                ],
+                        SelectionModel.Data.SportData.Rules.RulesStudy(
+                            id: 1,
+                            title: "Offside Rule in Football",
+                            desc: "In football, the offside rule is a fundamental aspect of fair play. A player is considered offside if they are nearer to the opponent's goal line than both the ball and the second-to-last defender when the ball is played to them, unless they are in their own half of the field or level with the second-to-last defender or level with the last two defenders. Understanding and applying the offside rule is crucial for players, coaches, and fans to appreciate the dynamics of goal-scoring opportunities and maintain the integrity of the game."
+                        ),
+                        SelectionModel.Data.SportData.Rules.RulesStudy(
+                            id: 2,
+                            title: "Fouls and Free Kicks in Football",
+                            desc: "In football, fouls are penalized to ensure a fair and safe game. A player commits a foul by engaging in unfair or reckless play. Common fouls include tripping, pushing, and handling the ball with hands. When a foul occurs, the opposing team is awarded a free kick. Understanding the rules around fouls and free kicks is essential for players to navigate the game strategically, as well as for referees to maintain order and uphold the principles of fair competition."
+                        ),
+                        SelectionModel.Data.SportData.Rules.RulesStudy(
+                            id: 3,
+                            title: "Three-Second Violation in Basketball",
+                            desc: "In basketball, the three-second violation is a key rule governing player positioning. An offensive player is not allowed to remain in the key or paint area (the restricted area near the basket) for more than three consecutive seconds. This rule prevents offensive players from camping in the key, promoting free movement and facilitating a dynamic style of play. Teams must be aware of the three-second rule to avoid turnovers and make effective offensive plays, while defenders use it to their advantage to disrupt opponents' strategies."
+                        ),
+                        SelectionModel.Data.SportData.Rules.RulesStudy(
+                            id: 4,
+                            title: "Double Dribble Rule in Basketball",
+                            desc: "The double dribble rule is a fundamental principle in basketball that governs ball-handling. A player is not allowed to dribble the ball, stop, and then start dribbling again. This violation, known as a double dribble, results in the loss of possession to the opposing team. Understanding and avoiding double dribbles is essential for players, as it ensures a fair and continuous flow of the game. Coaches emphasize this rule in training to enhance players' ball-handling skills and maintain the integrity of the sport."
+                        ),
+                        SelectionModel.Data.SportData.Rules.RulesStudy(
+                            id: 5,
+                            title: "Handball Violation in Football",
+                            desc: "Handball violations occur in football when a player deliberately handles the ball using their hand or arm. The rules define various situations where handball infractions can occur, such as a player gaining an unfair advantage or scoring a goal with their hand. Referees use video assistance to make accurate decisions in contentious handball situations. Understanding the handball rule is crucial for players, officials, and fans, as it influences match outcomes and contributes to the overall fairness of the game."
+                        ),
+                        // Add more football rules studies as needed
+
+                        SelectionModel.Data.SportData.Rules.RulesStudy(
+                            id: 6,
+                            title: "Shot Clock Violation in Basketball",
+                            desc: "Basketball features a shot clock, which is a time limit for a team to attempt a shot after gaining possession of the ball. A shot clock violation occurs when a team fails to release a shot before the shot clock expires. This rule adds urgency and pace to the game, preventing teams from stalling and promoting offensive strategies. Teams must efficiently move the ball and create scoring opportunities within the shot clock timeframe. The shot clock violation rule is integral to maintaining an exciting and dynamic playing environment in basketball."
+                        ),
+                        SelectionModel.Data.SportData.Rules.RulesStudy(
+                            id: 7,
+                            title: "Personal Foul Rule in Basketball",
+                            desc: "In basketball, personal fouls are committed when a player makes illegal physical contact with an opponent. Players accumulate personal fouls throughout the game, and reaching a certain limit results in free throws for the opposing team. Understanding the personal foul rule is essential for players to balance aggressive defense with avoiding excessive fouls. Coaches strategize to minimize fouls while maintaining effective defense. Referees play a crucial role in enforcing the personal foul rule to ensure fair play and player safety."
+                        ),
+                        SelectionModel.Data.SportData.Rules.RulesStudy(
+                            id: 8,
+                            title: "Traveling Violation in Basketball",
+                            desc: "The traveling violation is a fundamental rule in basketball that prohibits players from taking too many steps without dribbling the ball. When a player moves both feet without dribbling, it is considered traveling, resulting in a turnover and possession awarded to the opposing team. Coaches emphasize proper footwork and ball-handling skills to avoid traveling violations. Understanding and enforcing the traveling rule contribute to the fluidity and fairness of the game, ensuring that players adhere to established standards of play."
+                        ),
+                        SelectionModel.Data.SportData.Rules.RulesStudy(
+                            id: 9,
+                            title: "Technical Foul Rule in Basketball",
+                            desc: "Basketball includes technical fouls, which are infractions for unsportsmanlike conduct or rule violations not involving physical contact. Technical fouls result in free throws for the opposing team, providing an opportunity to score without active defense. Players and coaches must be aware of the consequences of technical fouls, as they can influence game momentum. Referees enforce the technical foul rule to maintain sportsmanship and uphold the integrity of the sport. Understanding when technical fouls may be assessed is crucial for players and teams to navigate game situations successfully."
+                        ),
+                        SelectionModel.Data.SportData.Rules.RulesStudy(
+                            id: 10,
+                            title: "Substitution Rule in Basketball",
+                            desc: "The substitution rule in basketball allows teams to replace players on the court during stoppages in play. Substitutions help manage player fatigue, adapt to specific game situations, and optimize team performance. Coaches strategically use substitutions to maintain a competitive edge. Understanding the substitution rule is essential for players, coaches, and fans, as it influences the dynamics of the game and player rotations. Successful teams leverage substitutions to capitalize on matchups and ensure peak performance throughout the game."
+                        )
+                    ],
                 test: [
                     SelectionModel.Data.SportData.Rules.RulesTest(
                         study_id: 1,
-                        question: "What is Lionel Messi known for besides his football skills?",
+                        question: "When is a player considered offside in football?",
                         answers: [
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Scoring the most goals in a single season"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Winning multiple FIFA World Player of the Year awards"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Demonstrating fair play and sportsmanship"),
-                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Being the tallest player in his team")
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "When they are in their own half of the field"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "When they are level with the second-to-last defender"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "When they are nearer to the opponent's goal line than the ball and the second-to-last defender"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "When they are level with the last two defenders")
                         ],
-                        correctAnswer: "Demonstrating fair play and sportsmanship"
+                        correctAnswer: "When they are nearer to the opponent's goal line than the ball and the second-to-last defender"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 1,
+                        question: "Why is understanding the offside rule crucial in football?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To encourage aggressive play"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To confuse opponents"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To appreciate the dynamics of goal-scoring opportunities"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To slow down the game")
+                        ],
+                        correctAnswer: "To appreciate the dynamics of goal-scoring opportunities"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 1,
+                        question: "In which situations is a player not considered offside?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "When they are level with the last two defenders"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "When they are in their own half of the field"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "When they are nearer to the opponent's goal line than the ball and the second-to-last defender"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "When they are level with the second-to-last defender")
+                        ],
+                        correctAnswer: "When they are level with the last two defenders"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 1,
+                        question: "What happens if a player is offside in football?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "They receive a warning"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "The opposing team is awarded a free kick"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "They are shown a yellow card"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "The opposing team is awarded a penalty kick")
+                        ],
+                        correctAnswer: "The opposing team is awarded a free kick"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 1,
+                        question: "What does the offside rule aim to maintain in football?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Player fatigue"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Goalkeeper positioning"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Fair play and the integrity of the game"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Crowd excitement")
+                        ],
+                        correctAnswer: "Fair play and the integrity of the game"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 1,
+                        question: "Is a player considered offside if they are level with the last two defenders?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Yes"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "No"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Only in the first half"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Depends on the referee's decision")
+                        ],
+                        correctAnswer: "No"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 2,
+                        question: "How is a player penalized for committing a foul in football?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "They receive a yellow card"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "The opposing team is awarded a goal"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "They are substituted"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "The opposing team is awarded a free kick")
+                        ],
+                        correctAnswer: "The opposing team is awarded a free kick"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 2,
+                        question: "What types of actions are considered fouls in football?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Cheering for the opposing team"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Scoring a goal"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Engaging in unfair or reckless play"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Running fast with the ball")
+                        ],
+                        correctAnswer: "Engaging in unfair or reckless play"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 2,
+                        question: "What happens when a player commits a foul in the penalty area?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "They receive a warning"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "The opposing team is awarded a throw-in"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "The opposing team is awarded a penalty kick"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "The player is sent off the field")
+                        ],
+                        correctAnswer: "The opposing team is awarded a penalty kick"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 2,
+                        question: "How do fouls impact the flow of the game in football?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "They have no impact"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "They lead to the suspension of the match"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "They result in extra playing time"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "They may stop the game temporarily or lead to injury time")
+                        ],
+                        correctAnswer: "They may stop the game temporarily or lead to injury time"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 2,
+                        question: "What is the purpose of awarding a free kick to the opposing team?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To give the player a chance to rest"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To punish the player's team"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To resume the game after a foul"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To determine the man of the match")
+                        ],
+                        correctAnswer: "To resume the game after a foul"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 2,
+                        question: "Is scoring a goal considered a foul in football?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Yes"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "No"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Only if done with the hand"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Depends on the referee's decision")
+                        ],
+                        correctAnswer: "No"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 3,
+                        question: "What does the three-second violation in basketball regulate?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Dribbling"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Player positioning in the key"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Shooting techniques"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Passing accuracy")
+                        ],
+                        correctAnswer: "Player positioning in the key"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 3,
+                        question: "Why is the three-second rule important in basketball?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To limit the number of players on the court"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To speed up the game"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To encourage more fouls"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To promote free movement and dynamic play")
+                        ],
+                        correctAnswer: "To promote free movement and dynamic play"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 3,
+                        question: "What area on the basketball court does the three-second violation apply to?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Half-court"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Sidelines"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Restricted area near the basket"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Three-point line")
+                        ],
+                        correctAnswer: "Restricted area near the basket"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 3,
+                        question: "How long can an offensive player stay in the key without violating the three-second rule?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Indefinitely"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "One second"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Three consecutive seconds"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Five consecutive seconds")
+                        ],
+                        correctAnswer: "Three consecutive seconds"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 3,
+                        question: "What is the purpose of the three-second rule for offensive players?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To prevent scoring"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To encourage fouls"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To limit offensive strategies"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To promote fair play and dynamic offensive plays")
+                        ],
+                        correctAnswer: "To promote fair play and dynamic offensive plays"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 3,
+                        question: "How do defenders use the three-second rule to their advantage?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "By avoiding the key"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "By ignoring the rule"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "By camping in the key"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "By disrupting opponents' strategies")
+                        ],
+                        correctAnswer: "By disrupting opponents' strategies"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 4,
+                        question: "What does the double dribble rule govern in basketball?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Shooting techniques"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Ball-handling"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Defensive strategies"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Passing accuracy")
+                        ],
+                        correctAnswer: "Ball-handling"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 4,
+                        question: "What happens if a player commits a double dribble violation?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "They receive a warning"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "They get a free throw"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "They lose possession to the opposing team"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "They are ejected from the game")
+                        ],
+                        correctAnswer: "They lose possession to the opposing team"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 4,
+                        question: "Why is understanding and avoiding double dribbles important in basketball?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To confuse opponents"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To showcase skills"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To enhance ball-handling skills and maintain fair play"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To slow down the game")
+                        ],
+                        correctAnswer: "To enhance ball-handling skills and maintain fair play"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 4,
+                        question: "What does a double dribble violation result in?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "A technical foul"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "A team timeout"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Loss of possession to the opposing team"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "A warning to the player")
+                        ],
+                        correctAnswer: "Loss of possession to the opposing team"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 4,
+                        question: "How do coaches emphasize the double dribble rule in training?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "By ignoring it"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "By penalizing players heavily"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "By encouraging double dribbles"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To enhance players' ball-handling skills")
+                        ],
+                        correctAnswer: "To enhance players' ball-handling skills"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 4,
+                        question: "What does a player have to do to commit a double dribble violation?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Dribble with both hands simultaneously"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Dribble, stop, and then start dribbling again"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Dribble for an extended period"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Dribble only with one hand")
+                        ],
+                        correctAnswer: "Dribble, stop, and then start dribbling again"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 5,
+                        question: "When does a handball violation occur in football?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Any time a player touches the ball with their hand"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Only during penalty kicks"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "When the ball accidentally hits a player's hand"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "When a player deliberately handles the ball")
+                        ],
+                        correctAnswer: "When a player deliberately handles the ball"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 5,
+                        question: "How do referees make decisions in contentious handball situations?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Flip a coin"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Guess the outcome"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Use video assistance"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Ask the players for their opinion")
+                        ],
+                        correctAnswer: "Use video assistance"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 5,
+                        question: "Why is understanding the handball rule crucial in football?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To confuse opponents"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To make the game more challenging"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "It has no impact on the game"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Influences match outcomes and contributes to overall fairness")
+                        ],
+                        correctAnswer: "Influences match outcomes and contributes to overall fairness"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 5,
+                        question: "What defines various situations where handball infractions can occur?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Referee's mood"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Team captains' decision"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Video assistance"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "The rules")
+                        ],
+                        correctAnswer: "The rules"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 5,
+                        question: "What happens when a player gains an unfair advantage or scores a goal with their hand?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "They receive a trophy"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "No consequences"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "The opposing team is penalized"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "It is considered a handball violation")
+                        ],
+                        correctAnswer: "It is considered a handball violation"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 5,
+                        question: "Who does the handball rule influence in football?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Only the players"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Referees and officials"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Spectators in the stadium"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Everyone involved: players, officials, and fans")
+                        ],
+                        correctAnswer: "Everyone involved: players, officials, and fans"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 6,
+                        question: "What is the shot clock in basketball?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "A clock for tracking game time"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "A clock for tracking player movements"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "A time limit for a team to attempt a shot"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "A clock for measuring timeouts")
+                        ],
+                        correctAnswer: "A time limit for a team to attempt a shot"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 6,
+                        question: "What happens when a team fails to release a shot before the shot clock expires?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "They receive extra time"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "No consequences"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "The opposing team is penalized"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "A shot clock violation occurs")
+                        ],
+                        correctAnswer: "A shot clock violation occurs"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 6,
+                        question: "Why does basketball have a shot clock?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To track game time"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To measure player performance"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To add urgency and pace to the game"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "For measuring timeouts")
+                        ],
+                        correctAnswer: "To add urgency and pace to the game"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 6,
+                        question: "What does the shot clock violation rule prevent teams from doing?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Scoring too many points"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Using timeouts recklessly"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Stalling and delaying the game"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Making substitutions too frequently")
+                        ],
+                        correctAnswer: "Stalling and delaying the game"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 6,
+                        question: "What is the purpose of the shot clock in basketball?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To give teams more time to strategize"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To slow down the pace of the game"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To maintain an exciting and dynamic playing environment"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To measure the total duration of the game")
+                        ],
+                        correctAnswer: "To maintain an exciting and dynamic playing environment"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 6,
+                        question: "What must teams do within the shot clock timeframe?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Nothing, it's optional"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Use timeouts strategically"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Create scoring opportunities and attempt a shot"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Delay the game to tire out opponents")
+                        ],
+                        correctAnswer: "Create scoring opportunities and attempt a shot"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 7,
+                        question: "What constitutes a personal foul in basketball?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Illegal dribbling"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Verbal taunting"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Illegal physical contact with an opponent"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Delay of game")
+                        ],
+                        correctAnswer: "Illegal physical contact with an opponent"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 7,
+                        question: "What happens when a player accumulates personal fouls in basketball?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "They receive a warning"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "No consequences"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "They are ejected from the game"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Free throws for the opposing team")
+                        ],
+                        correctAnswer: "Free throws for the opposing team"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 7,
+                        question: "Why is understanding the personal foul rule essential for basketball players?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To increase their scoring"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To disrupt opponents' strategies"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To balance aggressive defense with avoiding excessive fouls"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To maximize their playing time")
+                        ],
+                        correctAnswer: "To balance aggressive defense with avoiding excessive fouls"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 7,
+                        question: "How do coaches strategize regarding personal fouls in basketball?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Encourage more fouls"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Ignore fouls completely"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Minimize fouls while maintaining effective defense"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Increase aggressive fouling")
+                        ],
+                        correctAnswer: "Minimize fouls while maintaining effective defense"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 7,
+                        question: "What role do referees play in enforcing the personal foul rule?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "They encourage fouls"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "They penalize players for legal plays"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "They ignore fouls"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "They ensure fair play and player safety")
+                        ],
+                        correctAnswer: "They ensure fair play and player safety"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 7,
+                        question: "What is the consequence of accumulating too many personal fouls in basketball?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "A trophy is awarded"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Immediate ejection from the game"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Opponent's team is disqualified"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Free throws for the opposing team")
+                        ],
+                        correctAnswer: "Free throws for the opposing team"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 8,
+                        question: "What is the primary purpose of the traveling rule in basketball?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Encouraging excessive dribbling"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Promoting unfair play"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Maintaining fluidity and fairness of the game"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Awarding free throws to the opposing team")
+                        ],
+                        correctAnswer: "Maintaining fluidity and fairness of the game"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 8,
+                        question: "What happens when a player commits a traveling violation in basketball?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "The player is ejected from the game"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "The game continues without consequences"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "A warning is issued to the player"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Possession is awarded to the opposing team")
+                        ],
+                        correctAnswer: "Possession is awarded to the opposing team"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 8,
+                        question: "How does the shot clock contribute to the game of basketball?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Encourages stalling tactics"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Adds urgency and pace to the game"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Increases the time allowed for each possession"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Results in longer game durations")
+                        ],
+                        correctAnswer: "Adds urgency and pace to the game"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 8,
+                        question: "What is the consequence of a shot clock violation in basketball?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "The opposing team loses points"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "The game is paused"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Possession is awarded to the violating team"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Turnover, and possession is awarded to the opposing team")
+                        ],
+                        correctAnswer: "Turnover, and possession is awarded to the opposing team"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 8,
+                        question: "Why do basketball teams need to be aware of the shot clock?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To encourage stalling tactics"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To decrease the pace of the game"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To avoid turnovers"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To facilitate dynamic and strategic play")
+                        ],
+                        correctAnswer: "To facilitate dynamic and strategic play"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 8,
+                        question: "What does the shot clock violation rule prevent in basketball?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Encourages stalling tactics"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Promotes excessive dribbling"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Prevents teams from wasting time"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Teams from using strategic plays")
+                        ],
+                        correctAnswer: "Prevents teams from wasting time"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 9,
+                        question: "What are technical fouls in basketball typically associated with?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Physical contact between players"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Unsportsmanlike conduct or rule violations not involving physical contact"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Legal and fair play"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Scoring points for the team")
+                        ],
+                        correctAnswer: "Unsportsmanlike conduct or rule violations not involving physical contact"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 9,
+                        question: "What is the consequence of a technical foul in basketball?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "The game is paused for a timeout"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "The opposing team loses possession"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "The violating team is awarded free throws"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Free throws for the opposing team")
+                        ],
+                        correctAnswer: "Free throws for the opposing team"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 9,
+                        question: "Why is it important for players and teams to be aware of the technical foul rule?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To encourage unsportsmanlike conduct"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To manipulate game situations"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To avoid free throws for the opposing team"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To navigate game situations successfully")
+                        ],
+                        correctAnswer: "To navigate game situations successfully"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 9,
+                        question: "What does the technical foul rule aim to maintain in basketball?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Free throw accuracy"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Game momentum"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Unsportsmanlike conduct"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Player substitutions")
+                        ],
+                        correctAnswer: "Game momentum"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 9,
+                        question: "When are technical fouls typically assessed in basketball?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "During halftime"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Only in the final minutes of the game"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "At the beginning of each quarter"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Throughout the game in response to unsportsmanlike conduct or rule violations")
+                        ],
+                        correctAnswer: "Throughout the game in response to unsportsmanlike conduct or rule violations"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 9,
+                        question: "What opportunity does the opposing team have as a result of a technical foul?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Directly score points for their team"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Take possession of the ball"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Request a timeout"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Be awarded free throws")
+                        ],
+                        correctAnswer: "Be awarded free throws"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 10,
+                        question: "What does the substitution rule in basketball allow teams to do?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Change the basketball used in the game"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Challenge referee decisions"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Replace players during stoppages in play"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Alter the game duration")
+                        ],
+                        correctAnswer: "Replace players during stoppages in play"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 10,
+                        question: "How do coaches strategically use substitutions in basketball?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To determine the game's outcome"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To decrease the number of players on the court"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To increase player fatigue"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To manage player fatigue and optimize team performance")
+                        ],
+                        correctAnswer: "To manage player fatigue and optimize team performance"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 10,
+                        question: "Why is understanding the substitution rule essential for fans?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To predict game outcomes"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To influence referee decisions"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To appreciate player rotations and game dynamics"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To determine the game's duration")
+                        ],
+                        correctAnswer: "To appreciate player rotations and game dynamics"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 10,
+                        question: "What does the substitution rule influence in basketball?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Player uniform design"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Game venue selection"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Dynamics of the game and player rotations"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Pre-game rituals")
+                        ],
+                        correctAnswer: "Dynamics of the game and player rotations"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 10,
+                        question: "What do successful teams leverage substitutions for in basketball?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To limit player rotations"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To reduce team performance"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To capitalize on matchups and ensure peak performance"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "To increase player fatigue")
+                        ],
+                        correctAnswer: "To capitalize on matchups and ensure peak performance"
+                    ),
+                    SelectionModel.Data.SportData.Rules.RulesTest(
+                        study_id: 10,
+                        question: "When can teams make substitutions in basketball?",
+                        answers: [
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Only during halftime"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Throughout the game during stoppages in play"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "After every point scored"),
+                            SelectionModel.Data.SportData.Rules.RulesTest.Answer(answer: "Only in the final minutes of the game")
+                        ],
+                        correctAnswer: "Throughout the game during stoppages in play"
                     )
                 ]
             )
